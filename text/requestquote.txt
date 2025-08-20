@@ -1,0 +1,1075 @@
+// /* eslint-disable no-unused-vars */
+// import React from 'react';
+// import { motion } from 'framer-motion';
+// import { Form, Input, Button, DatePicker, Select, Checkbox, Card, Divider, Row, Col, message, Radio, TimePicker } from 'antd';
+// import { useForm, Controller } from 'react-hook-form';
+// import { useNavigate } from 'react-router-dom';
+
+// const { Option } = Select;
+
+// const RequestQuoteForm = () => {
+//   const navigate = useNavigate();
+//   const {
+//     control,
+//     handleSubmit,
+//     reset,
+//     formState: { errors, isSubmitting },
+//   } = useForm({
+//     defaultValues: {
+//       nature: '',
+//       eventName: '',
+//       date: null,
+//       location: '',
+//       noOfPeople: '',
+//       catering: null,
+//       theme: '',
+//       receptionist: false,
+//       multilingualHostess: false,
+//       travelHostess: false,
+//       salesHostess: false,
+//       email: '',
+//       fullName: '',
+//       phone: '',
+//       company: '',
+//       businessSector: '',
+//       address: '',
+//       city: '',
+//       country: '',
+//       staffQuantity: '',
+//       needOutfit: null,
+//       needStaffBriefing: null,
+//       needHeadStaff: null,
+//       eventCity: '',
+//       eventCountry: '',
+//       workingHoursFrom: null,
+//       workingHoursTo: null,
+//     },
+//   });
+
+//   const onSubmit = async (data) => {
+//     message.success('Form submitted!');
+//     console.log('Form Data:', data);
+//     reset();
+//   };
+
+//   return (
+//     <>
+//       <motion.div
+//         className="flex items-center justify-start"
+//         style={{ marginTop: 24, marginBottom: 16 }}
+//         initial={{ opacity: 0, y: 30 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.7, ease: 'easeOut' }}
+//       >
+//         <button
+//           type="button"
+//           onClick={() => navigate(-1)}
+//           className="ml-3 px-5 py-2 rounded-full bg-black text-white font-semibold shadow-md transition hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
+//           style={{ minWidth: 100, fontSize: 16, boxShadow: '0 2px 8px rgba(0,0,0,0.10)' }}
+//         >
+//           &#8592; Back
+//         </button>
+//       </motion.div>
+//     <motion.h1
+//       className="text-2xl font-bold text-center my-8"
+//       initial={{ opacity: 0, y: 40 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.7, ease: 'easeOut' }}
+//     >
+//       Request a Quote
+//     </motion.h1>
+//     <motion.p
+//       className="text-center mb-4"
+//       initial={{ opacity: 0, y: 40 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+//     >
+//       Fill out the form below to get a quote for your event needs.
+//     </motion.p>
+//     <motion.div
+//       initial={{ opacity: 0, y: 40 }}
+//       animate={{ opacity: 1, y: 0 }}
+//       transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
+//     >
+//       <Form
+//         layout="vertical"
+//         onFinish={handleSubmit(onSubmit)}
+//         style={{ maxWidth: 700, margin: '32px auto', padding: 24, fontFamily: 'Nohemi, system-ui, -apple-system, sans-serif' }}
+//         autoComplete="off"
+//       >
+//       {/* Your Event Section */}
+//       <Card style={{ marginBottom: 24 }}>
+//         <Divider style={{fontFamily:"font-nohemi"}} orientation="left">Your Event</Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item style={{fontFamily:"font-nohemi"}} label="Nature of the event" required validateStatus={errors.nature && 'error'} help={errors.nature && "Please enter event nature"}>
+//               <Controller
+//               style={{fontFamily:"font-nohemi"}}
+//                 name="nature"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: Conference, Seminar" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Name of the event" required validateStatus={errors.eventName && 'error'} help={errors.eventName && "Please enter event name"}>
+//               <Controller
+//                 name="eventName"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: Annual Meetup" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Date of the event" required validateStatus={errors.date && 'error'} help={errors.date && "Please pick a date"}>
+//               <Controller
+//                 name="date"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <DatePicker {...field} style={{ width: '100%' }} />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Physical location" required validateStatus={errors.location && 'error'} help={errors.location && "Please enter location"}>
+//               <Controller
+//                 name="location"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: Hotel Grand, City" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="City" required validateStatus={errors.eventCity && 'error'} help={errors.eventCity && "Please enter city"}>
+//               <Controller
+//                 name="eventCity"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="City" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Country" required validateStatus={errors.eventCountry && 'error'} help={errors.eventCountry && "Please enter country"}>
+//               <Controller
+//                 name="eventCountry"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Country" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="No. of People" required validateStatus={errors.noOfPeople && 'error'} help={errors.noOfPeople && "Please enter no. of people"}>
+//               <Controller
+//                 name="noOfPeople"
+//                 control={control}
+//                 rules={{
+//                   required: true,
+//                   pattern: { value: /^\d+$/, message: 'Enter a number' }
+//                 }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: 150" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Divider style={{fontFamily:"font-nohemi"}} orientation="left">Working hours</Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="From" required validateStatus={errors.workingHoursFrom && 'error'} help={errors.workingHoursFrom && "Please select start time"}>
+//               <Controller
+//                 name="workingHoursFrom"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <TimePicker {...field} style={{ width: '100%' }} format="HH:mm" placeholder="Start time" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="To" required validateStatus={errors.workingHoursTo && 'error'} help={errors.workingHoursTo && "Please select end time"}>
+//               <Controller
+//                 name="workingHoursTo"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <TimePicker {...field} style={{ width: '100%' }} format="HH:mm" placeholder="End time" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//       </Card>
+
+//       {/* Your Needs Section */}
+//       <Card style={{ marginBottom: 24 }} bordered={false}>
+//         <Divider style={{fontFamily:"font-nohemi"}} orientation="left">Your Needs</Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24}>
+//             <Form.Item label="Quantity of staff desired" required validateStatus={errors.staffQuantity && 'error'} help={errors.staffQuantity && "Please enter quantity"}>
+//               <Controller
+//                 name="staffQuantity"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input.TextArea {...field} placeholder="Enter number and any details" autoSize />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="Do you need an outfit?" required validateStatus={errors.needOutfit && 'error'} help={errors.needOutfit && "Required"}>
+//               <Controller
+//                 name="needOutfit"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => (
+//                   <Radio.Group {...field}>
+//                     <Radio value={true}>Yes</Radio>
+//                     <Radio value={false}>No</Radio>
+//                   </Radio.Group>
+//                 )}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="Do you need a staff briefing?" required validateStatus={errors.needStaffBriefing && 'error'} help={errors.needStaffBriefing && "Required"}>
+//               <Controller
+//                 name="needStaffBriefing"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => (
+//                   <Radio.Group {...field}>
+//                     <Radio value={true}>Yes</Radio>
+//                     <Radio value={false}>No</Radio>
+//                   </Radio.Group>
+//                 )}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="Do you need a head staff?" required validateStatus={errors.needHeadStaff && 'error'} help={errors.needHeadStaff && "Required"}>
+//               <Controller
+//                 name="needHeadStaff"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => (
+//                   <Radio.Group {...field}>
+//                     <Radio value={true}>Yes</Radio>
+//                     <Radio value={false}>No</Radio>
+//                   </Radio.Group>
+//                 )}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//       </Card>
+
+//       {/* Your Required Section */}
+//       <Card style={{ marginBottom: 24 }} bordered={false}>
+//         <Divider style={{fontFamily:"font-nohemi"}} orientation="left">Your Required</Divider>
+//         <Form.Item>
+//           <Row gutter={[16, 8]}>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="receptionist"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Receptionist
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="multilingualHostess"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Multilingual Hostess
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="travelHostess"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Travel Hostess
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="salesHostess"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Sales Hostess
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//           </Row>
+//         </Form.Item>
+//       </Card>
+
+//       {/* Contact Information */}
+//       <Card style={{ marginBottom: 24 }} bordered={false}>
+//         <Divider style={{fontFamily:"font-nohemi"}} orientation="left">Contact Information</Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Full Name" required validateStatus={errors.fullName && 'error'} help={errors.fullName && "Enter your name"}>
+//               <Controller
+//                 name="fullName"
+//                 control={control}
+//                 rules={{ required: true, minLength: 2 }}
+//                 render={({ field }) => <Input {...field} placeholder="Your name" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Company Name">
+//               <Controller
+//                 name="company"
+//                 control={control}
+//                 render={({ field }) => <Input {...field} placeholder="Your company (optional)" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Business Sector">
+//               <Controller
+//                 name="businessSector"
+//                 control={control}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: IT, Hospitality, Education" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Address" required validateStatus={errors.address && 'error'} help={errors.address && "Enter your address"}>
+//               <Controller
+//                 name="address"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Street, Building, etc." />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={8}>
+//             <Form.Item label="City" required validateStatus={errors.city && 'error'} help={errors.city && "Enter your city"}>
+//               <Controller
+//                 name="city"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="City" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={8}>
+//             <Form.Item label="Country" required validateStatus={errors.country && 'error'} help={errors.country && "Enter your country"}>
+//               <Controller
+//                 name="country"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Country" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={8}>
+//             {/* Empty column for layout balance */}
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Email" required validateStatus={errors.email && 'error'} help={errors.email && "Enter a valid email"}>
+//               <Controller
+//                 name="email"
+//                 control={control}
+//                 rules={{ required: true, pattern: { value: /^\S+@\S+$/i, message: "Invalid email" } }}
+//                 render={({ field }) => <Input {...field} placeholder="Email address" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Phone Number" required validateStatus={errors.phone && 'error'} help={errors.phone && "Enter phone number"}>
+//               <Controller
+//                 name="phone"
+//                 control={control}
+//                 rules={{ required: true, minLength: 8 }}
+//                 render={({ field }) => <Input {...field} placeholder="Phone number" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//       </Card>
+
+//       <Form.Item style={{ marginTop: 24 }}>
+//         <Button type="primary" htmlType="submit" loading={isSubmitting} block
+//           onClick={() => {
+//             const values = control._formValues;
+//             console.log('Current form payload:', values);
+//           }}
+//         >
+//           Get Quote
+//         </Button>
+//       </Form.Item>
+//       </Form>
+//     </motion.div>
+//     </>
+//   );
+// };
+
+// export default RequestQuoteForm;
+
+
+///////////////////////////////////////////////////////
+// /* eslint-disable no-unused-vars */
+// import React from 'react';
+// import { motion } from 'framer-motion';
+// import { Form, Input, Button, DatePicker, Select, Checkbox, Card, Divider, Row, Col, message, Radio, TimePicker } from 'antd';
+// import { useForm, Controller } from 'react-hook-form';
+// import { useNavigate } from 'react-router-dom';
+
+// const { Option } = Select;
+
+// const RequestQuoteForm = () => {
+//   const navigate = useNavigate();
+//   const {
+//     control,
+//     handleSubmit,
+//     reset,
+//     formState: { errors, isSubmitting },
+//   } = useForm({
+//     defaultValues: {
+//       nature: '',
+//       eventName: '',
+//       date: null,
+//       location: '',
+//       noOfPeople: '',
+//       catering: null,
+//       theme: '',
+//       receptionist: false,
+//       multilingualHostess: false,
+//       travelHostess: false,
+//       salesHostess: false,
+//       email: '',
+//       fullName: '',
+//       phone: '',
+//       company: '',
+//       businessSector: '',
+//       address: '',
+//       city: '',
+//       country: '',
+//       staffQuantity: '',
+//       needOutfit: null,
+//       needStaffBriefing: null,
+//       needHeadStaff: null,
+//       eventCity: '',
+//       eventCountry: '',
+//       workingHoursFrom: null,
+//       workingHoursTo: null,
+//     },
+//   });
+
+//   const onSubmit = async (data) => {
+//     message.success('Form submitted!');
+//     console.log('Form Data:', data);
+//     reset();
+//   };
+
+//   return (
+//     <div style={{
+//       minHeight: '100vh',
+//       height: '100%',
+//       background: '#000',
+//       color: '#fff',
+//       width: '100vw',
+//       margin: 0,
+//       padding: 0,
+//       boxSizing: 'border-box'
+//     }}>
+//       <style jsx global>{`
+//         body, html, #root {
+//           margin: 0;
+//           padding: 0;
+//           background: #000 !important;
+//         }
+
+//         /* Ant Design Input styling */
+//         .ant-input {
+//           background: #222 !important;
+//           border: 1px solid #444 !important;
+//           color: #fff !important;
+//         }
+
+//         .ant-input:hover {
+//           border-color: #FFD700 !important;
+//         }
+
+//         .ant-input:focus {
+//           border-color: #FFD700 !important;
+//           box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2) !important;
+//         }
+
+//         .ant-input::placeholder {
+//           color: #999 !important;
+//         }
+
+//         /* TextArea styling */
+//         .ant-input-textarea .ant-input {
+//           background: #222 !important;
+//           border: 1px solid #444 !important;
+//           color: #fff !important;
+//         }
+
+//         /* DatePicker styling */
+//         .ant-picker {
+//           background: #222 !important;
+//           border: 1px solid #444 !important;
+//           color: #fff !important;
+//         }
+
+//         .ant-picker:hover {
+//           border-color: #FFD700 !important;
+//         }
+
+//         .ant-picker-focused {
+//           border-color: #FFD700 !important;
+//           box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2) !important;
+//         }
+
+//         .ant-picker-input > input {
+//           color: #fff !important;
+//         }
+
+//         .ant-picker-input > input::placeholder {
+//           color: #999 !important;
+//         }
+
+//         /* TimePicker styling */
+//         .ant-picker-time-panel-column {
+//           background: #222 !important;
+//         }
+
+//         .ant-picker-time-panel-cell-inner {
+//           color: #fff !important;
+//         }
+
+//         /* Radio styling */
+//         .ant-radio-wrapper {
+//           color: #fff !important;
+//         }
+
+//         .ant-radio-inner {
+//           background: #222 !important;
+//           border-color: #444 !important;
+//         }
+
+//         .ant-radio-checked .ant-radio-inner {
+//           background: #FFD700 !important;
+//           border-color: #FFD700 !important;
+//         }
+
+//         /* Checkbox styling */
+//         .ant-checkbox-wrapper {
+//           color: #fff !important;
+//         }
+
+//         .ant-checkbox-inner {
+//           background: #222 !important;
+//           border-color: #444 !important;
+//         }
+
+//         .ant-checkbox-checked .ant-checkbox-inner {
+//           background: #FFD700 !important;
+//           border-color: #FFD700 !important;
+//         }
+
+//         .ant-checkbox-checked .ant-checkbox-inner:after {
+//           border-color: #000 !important;
+//         }
+
+//         /* Form label styling */
+//         .ant-form-item-label > label {
+//           color: #fff !important;
+//         }
+
+//         /* Form help text styling */
+//         .ant-form-item-explain-error {
+//           color: #ff4d4f !important;
+//         }
+
+//         /* Dropdown/Select styling */
+//         .ant-select {
+//           color: #fff !important;
+//         }
+
+//         .ant-select .ant-select-selector {
+//           background: #222 !important;
+//           border: 1px solid #444 !important;
+//           color: #fff !important;
+//         }
+
+//         .ant-select .ant-select-selection-placeholder {
+//           color: #999 !important;
+//         }
+//       `}</style>
+
+//       <motion.div
+//         className="flex items-center justify-start"
+//         style={{ marginTop: 24, marginBottom: 16 }}
+//         initial={{ opacity: 0, y: 30 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.7, ease: 'easeOut' }}
+//       >
+//         {/* <button
+//           type="button"
+//           onClick={() => navigate(-1)}
+//           className="ml-3 px-5 py-2 rounded-full font-semibold shadow-md transition focus:outline-none focus:ring-2"
+//           style={{
+//             minWidth: 100,
+//             fontSize: 16,
+//             boxShadow: '0 2px 8px rgba(255,255,255,0.10)',
+//             // background: '#fff',
+//             color: '#fff',
+//             border: 'none'
+//           }}
+//         >
+//           <span style={{ color: '#fff', marginRight: 6 }}>&#8592;</span> Back
+//         </button> */}
+//         <button
+//           type="button"
+//           onClick={() => navigate(-1)}
+//           style={{
+//             minWidth: 100,
+//             fontSize: 16,
+//             padding: '8px 20px',
+//             borderRadius: '999px',
+//             color: '#fff',
+//             background: 'transparent',
+//             border: '1px solid #fff',
+//             cursor: 'pointer'
+//           }}
+//         >
+//           <span style={{ marginRight: 6 }}>&#8592;</span> Back
+//         </button>
+//       </motion.div>
+
+//       <motion.h1
+//         className="text-2xl font-bold text-center my-8"
+//         initial={{ opacity: 0, y: 40 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.7, ease: 'easeOut' }}
+//         style={{ color: '#fff' }}
+//       >
+//         Request a <span style={{ color: '#fff' }}>Quote</span>
+//       </motion.h1>
+
+//       <motion.p
+//         className="text-center mb-4"
+//         initial={{ opacity: 0, y: 40 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+//         style={{ color: '#fff' }}
+//       >
+//         Fill out the form below to get a quote for your event needs.
+//       </motion.p>
+
+//       <motion.div
+//         initial={{ opacity: 0, y: 40 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.7, ease: 'easeOut', delay: 0.4 }}
+//       >
+//         <Form
+//           layout="vertical"
+//           onFinish={handleSubmit(onSubmit)}
+//           style={{
+//             maxWidth: 700,
+//             margin: '32px auto',
+//             padding: 24,
+//             fontFamily: 'Nohemi, system-ui, -apple-system, sans-serif',
+//             // background: '#111',
+//             color: '#fff',
+//             borderRadius: 16
+//           }}
+//           autoComplete="off"
+//         >
+//       {/* Your Event Section */}
+//       <Card style={{ marginBottom: 24, background: '#000000', color: '#fff', border: 'none' }}>
+//         <Divider style={{fontFamily:"font-nohemi", color: '#FFD700', borderColor: '#FFD700', fontWeight: 700}} orientation="left"><span style={{color:'#fff'}}>Your</span> <span style={{color:'#fff'}}>Event</span></Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item style={{fontFamily:"font-nohemi"}} label="Nature of the event" required validateStatus={errors.nature && 'error'} help={errors.nature && "Please enter event nature"}>
+//               <Controller
+//               style={{fontFamily:"font-nohemi"}}
+//                 name="nature"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: Conference, Seminar" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Name of the event" required validateStatus={errors.eventName && 'error'} help={errors.eventName && "Please enter event name"}>
+//               <Controller
+//                 name="eventName"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: Annual Meetup" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Date of the event" required validateStatus={errors.date && 'error'} help={errors.date && "Please pick a date"}>
+//               <Controller
+//                 name="date"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <DatePicker {...field} style={{ width: '100%' }} />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Physical location" required validateStatus={errors.location && 'error'} help={errors.location && "Please enter location"}>
+//               <Controller
+//                 name="location"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: Hotel Grand, City" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="City" required validateStatus={errors.eventCity && 'error'} help={errors.eventCity && "Please enter city"}>
+//               <Controller
+//                 name="eventCity"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="City" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Country" required validateStatus={errors.eventCountry && 'error'} help={errors.eventCountry && "Please enter country"}>
+//               <Controller
+//                 name="eventCountry"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Country" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="No. of People" required validateStatus={errors.noOfPeople && 'error'} help={errors.noOfPeople && "Please enter no. of people"}>
+//               <Controller
+//                 name="noOfPeople"
+//                 control={control}
+//                 rules={{
+//                   required: true,
+//                   pattern: { value: /^\d+$/, message: 'Enter a number' }
+//                 }}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: 150" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Divider style={{fontFamily:"font-nohemi",color:"#fff"}} orientation="left">Working hours</Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="From" required validateStatus={errors.workingHoursFrom && 'error'} help={errors.workingHoursFrom && "Please select start time"}>
+//               <Controller
+//                 name="workingHoursFrom"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <TimePicker {...field} style={{ width: '100%' }} format="HH:mm" placeholder="Start time" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="To" required validateStatus={errors.workingHoursTo && 'error'} help={errors.workingHoursTo && "Please select end time"}>
+//               <Controller
+//                 name="workingHoursTo"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <TimePicker {...field} style={{ width: '100%' }} format="HH:mm" placeholder="End time" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//       </Card>
+
+//       {/* Your Needs Section */}
+//       <Card style={{ marginBottom: 24, background: '#000000', color: '#fff', border: 'none' }} bordered={false}>
+//         <Divider style={{fontFamily:"font-nohemi", color: '#FFD700', borderColor: '#FFD700', fontWeight: 700}} orientation="left"><span style={{color:'#fff'}}>Your</span> <span style={{color:'#fff'}}>Needs</span></Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24}>
+//             <Form.Item label="Quantity of staff desired" required validateStatus={errors.staffQuantity && 'error'} help={errors.staffQuantity && "Please enter quantity"}>
+//               <Controller
+//                 name="staffQuantity"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input.TextArea {...field} placeholder="Enter number and any details" autoSize />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="Do you need an outfit?" required validateStatus={errors.needOutfit && 'error'} help={errors.needOutfit && "Required"}>
+//               <Controller
+//                 name="needOutfit"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => (
+//                   <Radio.Group {...field}>
+//                     <Radio value={true}>Yes</Radio>
+//                     <Radio value={false}>No</Radio>
+//                   </Radio.Group>
+//                 )}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="Do you need a staff briefing?" required validateStatus={errors.needStaffBriefing && 'error'} help={errors.needStaffBriefing && "Required"}>
+//               <Controller
+//                 name="needStaffBriefing"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => (
+//                   <Radio.Group {...field}>
+//                     <Radio value={true}>Yes</Radio>
+//                     <Radio value={false}>No</Radio>
+//                   </Radio.Group>
+//                 )}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={6}>
+//             <Form.Item label="Do you need a head staff?" required validateStatus={errors.needHeadStaff && 'error'} help={errors.needHeadStaff && "Required"}>
+//               <Controller
+//                 name="needHeadStaff"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => (
+//                   <Radio.Group {...field}>
+//                     <Radio value={true}>Yes</Radio>
+//                     <Radio value={false}>No</Radio>
+//                   </Radio.Group>
+//                 )}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//       </Card>
+
+//       {/* Your Required Section */}
+//       <Card style={{ marginBottom: 24, background: '#000000', color: '#fff', border: 'none' }} bordered={false}>
+//         <Divider style={{fontFamily:"font-nohemi", color: '#FFD700', borderColor: '#FFD700', fontWeight: 700}} orientation="left"><span style={{color:'#fff'}}>Your</span> <span style={{color:'#fff'}}>Required</span></Divider>
+//         <Form.Item>
+//           <Row gutter={[16, 8]}>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="receptionist"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Receptionist
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="multilingualHostess"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Multilingual Hostess
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="travelHostess"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Travel Hostess
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//             <Col xs={24} sm={6}>
+//               <Controller
+//                 name="salesHostess"
+//                 control={control}
+//                 render={({ field }) => (
+//                   <Checkbox {...field} checked={field.value}>
+//                     Sales Hostess
+//                   </Checkbox>
+//                 )}
+//               />
+//             </Col>
+//           </Row>
+//         </Form.Item>
+//       </Card>
+
+//       {/* Contact Information */}
+//       <Card style={{ marginBottom: 24, background: '#000000', color: '#fff', border: 'none' }} bordered={false}>
+//         <Divider style={{fontFamily:"font-nohemi", color: '#FFD700', borderColor: '#FFD700', fontWeight: 700}} orientation="left"><span style={{color:'#fff'}}>Contact</span> <span style={{color:'#fff'}}>Information</span></Divider>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Full Name" required validateStatus={errors.fullName && 'error'} help={errors.fullName && "Enter your name"}>
+//               <Controller
+//                 name="fullName"
+//                 control={control}
+//                 rules={{ required: true, minLength: 2 }}
+//                 render={({ field }) => <Input {...field} placeholder="Your name" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Company Name">
+//               <Controller
+//                 name="company"
+//                 control={control}
+//                 render={({ field }) => <Input {...field} placeholder="Your company (optional)" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Business Sector">
+//               <Controller
+//                 name="businessSector"
+//                 control={control}
+//                 render={({ field }) => <Input {...field} placeholder="Eg: IT, Hospitality, Education" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Address" required validateStatus={errors.address && 'error'} help={errors.address && "Enter your address"}>
+//               <Controller
+//                 name="address"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Street, Building, etc." />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={8}>
+//             <Form.Item label="City" required validateStatus={errors.city && 'error'} help={errors.city && "Enter your city"}>
+//               <Controller
+//                 name="city"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="City" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={8}>
+//             <Form.Item label="Country" required validateStatus={errors.country && 'error'} help={errors.country && "Enter your country"}>
+//               <Controller
+//                 name="country"
+//                 control={control}
+//                 rules={{ required: true }}
+//                 render={({ field }) => <Input {...field} placeholder="Country" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={8}>
+//             {/* Empty column for layout balance */}
+//           </Col>
+//         </Row>
+//         <Row gutter={[16, 0]}>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Email" required validateStatus={errors.email && 'error'} help={errors.email && "Enter a valid email"}>
+//               <Controller
+//                 name="email"
+//                 control={control}
+//                 rules={{ required: true, pattern: { value: /^\S+@\S+$/i, message: "Invalid email" } }}
+//                 render={({ field }) => <Input {...field} placeholder="Email address" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//           <Col xs={24} md={12}>
+//             <Form.Item label="Phone Number" required validateStatus={errors.phone && 'error'} help={errors.phone && "Enter phone number"}>
+//               <Controller
+//                 name="phone"
+//                 control={control}
+//                 rules={{ required: true, minLength: 8 }}
+//                 render={({ field }) => <Input {...field} placeholder="Phone number" />}
+//               />
+//             </Form.Item>
+//           </Col>
+//         </Row>
+//       </Card>
+
+//       <Form.Item style={{ marginTop: 24 }}>
+//         <Button
+//           type="primary"
+//           htmlType="submit"
+//           loading={isSubmitting}
+//           block
+//           style={{
+//             background: '#13294B',
+//             color: '#fff',
+//             fontWeight: 700,
+//             fontSize: 18,
+//             letterSpacing: 1,
+//             boxShadow: '0 0 12px 2px #13294B',
+//             border: 'none',
+//             height: '50px',
+//             transition: 'background 0.2s',
+//           }}
+//           className="get-quote-btn"
+//           onClick={() => {
+//             const values = control._formValues;
+//             console.log('Current form payload:', values);
+//           }}
+//         >
+//           Get Quote
+//         </Button>
+//         <style>{`
+//           .get-quote-btn:hover {
+//             background: #2546a3 !important;
+//             color: #fff !important;
+//           }
+//         `}</style>
+//       </Form.Item>
+//       </Form>
+//       </motion.div>
+//     </div>
+//   );
+// };
+
+// export default RequestQuoteForm;

@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "NohemiThin";
+  src: url("./fonts/Nohemi/Web-TT/Nohemi-Thin.woff") format("woff"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Thin.woff2")
+      format("woff2"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Thin.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "NohemiSemBd";
+  src: url("./fonts/Nohemi/Web-TT/Nohemi-SemiBold.woff") format("woff"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-SemiBold.woff2")
+      format("woff2"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-SemiBold.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("./fonts/Nohemi/Web-TT/Nohemi-Regular.woff") format("woff"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Regular.woff2")
+      format("woff2"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Regular.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "NohemiMed";
+  src: url("./fonts/Nohemi/Web-TT/Nohemi-Medium.woff") format("woff"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Medium.woff2")
+      format("woff2"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Medium.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "NohemiLight";
+  src: url("./fonts/Nohemi/Web-TT/Nohemi-Light.woff") format("woff"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Light.woff2")
+      format("woff2"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-Light.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+@font-face {
+  font-family: "NohemiExtLt";
+  src: url("./fonts/Nohemi/Web-TT/Nohemi-ExtraLight.woff") format("woff"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-ExtraLight.woff2")
+      format("woff2"),
+    /* Modern Browsers */ url("./fonts/Nohemi/Web-TT/Nohemi-ExtraLight.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+}
+/* Custom Nohemi font utilities */
+.font-nohemi-thin {
+  font-family: "NohemiThin", system-ui, -apple-system, sans-serif;
+}
+
+.font-nohemi-extralight {
+  font-family: "NohemiExtLt", system-ui, -apple-system, sans-serif;
+}
+
+.font-nohemi-light {
+  font-family: "NohemiLight", system-ui, -apple-system, sans-serif;
+}
+
+.font-nohemi {
+  font-family: "Nohemi", system-ui, -apple-system, sans-serif;
+}
+
+.font-nohemi-medium {
+  font-family: "NohemiMed", system-ui, -apple-system, sans-serif;
+}
+
+.font-nohemi-semibold {
+  font-family: "NohemiSemBd", system-ui, -apple-system, sans-serif;
+}
+
+/*default font for the entire app */
+body {
+  font-family: "Nohemi", system-ui, -apple-system, sans-serif;
+}
+/* Make logout button text white on hover */
+.ant-btn-primary:hover {
+  background-color: #ef4444 !important; /* darker red */
+  border-color: #ef4444 !important;
+}
+
+/* Light blue background for table header cells */
+.ant-table-thead > tr > th {
+  background-color: #d0e7ff !important; /* light blue */
+}
+.export-btn:hover,
+.export-btn:focus {
+  background-color: #28a745 !important; /* green */
+  border-color: #28a745 !important;
+  color: white !important;
+}
