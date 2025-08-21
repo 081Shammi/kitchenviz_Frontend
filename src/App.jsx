@@ -27,6 +27,15 @@ import Recruitmentinfo from "./dashboard/tables/Recruitmentinfo";
 import AdminLayout from "./layout/Layout";
 import Get from "./components/forms/Get";
 import { i } from "motion/react-client";
+import AboutUsPage from "./pages/AboutUs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
+import Exclusions from "./pages/Exclusions";
+import ExchangePolicy from "./pages/ExchangePolicy";
+import ReturnPolicy from "./pages/ReturnPolicy";
+import HowToReachUs from "./pages/ReachUs";
+import ImportantNotes from "./pages/ImportantNotes";
+import ContactUsPage from "./pages/ReachUs";
 
 const AppRouter = () => {
   const [auth, setAuth] = useState(null);
@@ -86,7 +95,14 @@ const AppRouter = () => {
           <>
             <Route path="/" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/request-quote" element={<RequestQuoteForm />} />
+            <Route path="/about-us" element={<AboutUsPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/return-policy" element={<ReturnPolicy />} />
+            <Route path="/exchange-policy" element={<ExchangePolicy />} />
+            <Route path="/contact-us" element={<ContactUsPage />} />
+            <Route path="/important-notes" element={<ImportantNotes />} />
+            <Route path="/exclusions" element={<Exclusions />} />
             <Route path="/recruitment" element={<RecruitmentForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="/get" element={<Get />} />
