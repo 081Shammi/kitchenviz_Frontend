@@ -18,7 +18,7 @@ import HomePage from "./pages/HomePage";
 import RequestQuoteForm from "./components/forms/RequestQuoteForm";
 import RecruitmentForm from "./components/forms/RecruitmentForm";
 import Login from "./components/login/LoginForm";
-
+import ProductDetail from "./components/ProductDetails";
 // Dashboard pages
 import RootOutlet from "./dashboard/RootOutlet";
 import DefaultOutlet from "./dashboard/DefaultOutlet";
@@ -26,6 +26,7 @@ import GetQuoteinfo from "./dashboard/tables/GetQuoteinfo";
 import Recruitmentinfo from "./dashboard/tables/Recruitmentinfo";
 import AdminLayout from "./layout/Layout";
 import Get from "./components/forms/Get";
+import { i } from "motion/react-client";
 
 const AppRouter = () => {
   const [auth, setAuth] = useState(null);
@@ -84,6 +85,7 @@ const AppRouter = () => {
         {!auth ? (
           <>
             <Route path="/" element={<HomePage />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/request-quote" element={<RequestQuoteForm />} />
             <Route path="/recruitment" element={<RecruitmentForm />} />
             <Route path="/login" element={<Login />} />
