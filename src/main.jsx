@@ -19,6 +19,7 @@ import App from "./App.jsx";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import userReducer from "./reducers/users.js";
+import cartReducer from "./reducers/cart.js";
 // import userReducer from "./reducers/user";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore, persistReducer } from "redux-persist";
@@ -29,6 +30,7 @@ import "antd/dist/reset.css";
 
 const reducers = combineReducers({
   user: userReducer,
+  cart:cartReducer,
 });
 
 const persistConfig = {

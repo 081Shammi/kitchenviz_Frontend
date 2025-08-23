@@ -35,13 +35,15 @@ export default function Login() {
       if (response.status === 200) {
         console.log("Login successful", response.data);
 
-        const { _id, username, access_token } = response.data;
+        const { user_id, name, access_token ,email} = response.data.data;
+        // console.log("User data:", user_id, name, access_token, email);
+        
 
         // ✅ Save in Redux store
         dispatch(
           login({
-            id: _id,
-            name: username,
+            id: user_id,
+            name: name,
             role: ROLES.ADMIN, // You can dynamically set role if API provides it
             email_id: email,
             access_token: access_token,

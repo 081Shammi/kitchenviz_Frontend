@@ -7,6 +7,7 @@ import {
   FormOutlined,
   UsergroupAddOutlined,
   LogoutOutlined,
+  UnorderedListOutlined,
 } from "@ant-design/icons";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -48,7 +49,7 @@ const AdminLayout = () => {
           }}
         >
           <img
-            src="/public/assets/logo.png"
+            src="/public/assets/logo1.jpg"
             alt="Logo"
             style={{ height: 100, width: 100, marginBottom: 8 }}
           />
@@ -64,56 +65,30 @@ const AdminLayout = () => {
             Admin
           </span>
         </div>
-        {/* <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          onClick={({ key }) => {
-            if (key === "1") navigate("/dashboard/getquote");
-            else if (key === "2") navigate("/dashboard/recruitment");}}
-
-          style={{
-            background: "transparent",
-            border: "none",
-            color: "#18181b",
-          }}
-          items={[
-            {
-              key: "1",
-              icon: <FormOutlined style={{ fontSize: 18, color: "#18181b" }} />,
-              label: (
-                <span style={{ color: "#18181b" }}>Request Quote Info</span>
-              ),
-            },
-            {
-              key: "2",
-              icon: (
-                <UsergroupAddOutlined
-                  style={{ fontSize: 18, color: "#18181b" }}
-                />
-              ),
-              label: <span style={{ color: "#18181b" }}>Recruitment Info</span>,
-            },
-          ]}
-        /> */}
         <Menu
           theme="light"
           mode="inline"
           selectedKeys={[location.pathname.includes("recruitment") ? "2" : "1"]} // keeps highlight in sync
           onClick={({ key }) => {
-            if (key === "1") navigate("/dashboard/getquote");
-            else if (key === "2") navigate("/dashboard/recruitment");
+            if (key === "1") navigate("/dashboard/CategoryList");
+            else if (key === "2") navigate("/dashboard/ProductList");
+            else if (key === "3") navigate("/dashboard/ProductSliderList");
           }}
           items={[
             {
               key: "1",
-              icon: <FormOutlined />,
-              label: "Request Quote Info",
+              icon: <UnorderedListOutlined />,
+              label: "Category List",
             },
             {
               key: "2",
-              icon: <UsergroupAddOutlined />,
-              label: "Recruitment Info",
+              icon: <UnorderedListOutlined />,
+              label: "Product List",
+            },
+            {
+              key: "3",
+              icon: <UnorderedListOutlined />,
+              label: "Slider List",
             },
           ]}
         />
@@ -162,7 +137,7 @@ const AdminLayout = () => {
                 color: "#18181b",
               }}
             >
-              Nuvó Hosting Agency
+              Kicthen Viz Admin Dashboard
             </span>
           </div>
 

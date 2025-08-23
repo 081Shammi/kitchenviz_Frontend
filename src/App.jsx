@@ -36,6 +36,15 @@ import ReturnPolicy from "./pages/ReturnPolicy";
 import HowToReachUs from "./pages/ReachUs";
 import ImportantNotes from "./pages/ImportantNotes";
 import ContactUsPage from "./pages/ReachUs";
+import CategoryList from "./dashboard/tables/CategoryList";
+import AddCategory from "./dashboard/tables/AddCategory";
+import ProductListing from "./dashboard/tables/ProductList";
+import AddProduct from "./dashboard/tables/AddProduct";
+import CartPage from "./components/Cart";
+import ProductSliderList from "./components/slider/ProductSliderList";
+import ProductSliderForm from "./components/slider/productSliderForm";
+import CheckoutForm from "./components/CheckoutForm";
+import CheckoutPage from "./components/Checkout";
 
 const AppRouter = () => {
   const [auth, setAuth] = useState(null);
@@ -43,7 +52,7 @@ const AppRouter = () => {
   const user = useSelector((state) => state.user.value);
 
   const isAdmin = ROLES.ADMIN === user?.role;
-
+  localStorage.removeItem("cart");
   useEffect(() => {
     function checkAuth() {
       try {
@@ -103,6 +112,8 @@ const AppRouter = () => {
             <Route path="/contact-us" element={<ContactUsPage />} />
             <Route path="/important-notes" element={<ImportantNotes />} />
             <Route path="/exclusions" element={<Exclusions />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/CheckoutPage" element={<CheckoutPage />} />
             <Route path="/recruitment" element={<RecruitmentForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="/get" element={<Get />} />
@@ -112,9 +123,15 @@ const AppRouter = () => {
           /* If logged in & admin → allow dashboard */
           <>
             <Route path="/dashboard" element={<AdminLayout />}>
-              <Route index element={<Navigate to="getquote" replace />} />
-              <Route path="getquote" element={<GetQuoteinfo />} />
-              <Route path="recruitment" element={<Recruitmentinfo />} />
+              <Route index element={<Navigate to="CategoryList" replace />} />
+              <Route path="CategoryList" element={<CategoryList />} />
+              <Route path="CategoryList/add" element={<AddCategory />} />
+              <Route path="ProductSliderList" element={<ProductSliderList />} />
+              <Route path="ProductSliderList/add" element={<ProductSliderForm />} />
+              <Route path="CategoryList/add" element={<AddCategory />} />
+              <Route path="CategoryList/edit/:id" element={<AddCategory />} />
+              <Route path="ProductList" element={<ProductListing />} />
+              <Route path="ProductList/add" element={<AddProduct />} />
             </Route>
           </>
         ) : (
