@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Routes, Route } from "react-router-dom";
 import verifyToken from "./verifyjwt";
 import { ROLES } from "./config";
+import 'react-toastify/dist/ReactToastify.css';
 
 // Public pages
 import HomePage from "./pages/HomePage";

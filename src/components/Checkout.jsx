@@ -5,6 +5,7 @@ import { API_BASE_URL } from "../config";
 import Footer from "./Footer";
 import Header from "./Header";
 import { message } from "antd";
+import { ToastContainer } from 'react-toastify';
 
 export default function CheckoutPage() {
   const cart = useSelector((state) => state.cart?.items || []);
