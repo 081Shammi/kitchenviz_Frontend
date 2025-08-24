@@ -1,4 +1,3 @@
-// src/reducers/cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialCart = JSON.parse(localStorage.getItem("cart") || "[]");
