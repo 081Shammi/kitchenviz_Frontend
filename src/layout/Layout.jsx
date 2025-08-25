@@ -3,13 +3,10 @@ import { Layout, Menu, Button } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
-  FormOutlined,
-  UsergroupAddOutlined,
   LogoutOutlined,
-  UnorderedListOutlined,
+  UnorderedListOutlined
 } from "@ant-design/icons";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../reducers/users";
 
@@ -20,11 +17,21 @@ const AdminLayout = () => {
   const colorBgContainer = "#fff";
   const borderRadiusLG = 8;
   const navigate = useNavigate();
+  const location = useLocation();  // Add this!
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout()); // clear Redux state
     navigate("/login", { replace: true }); // redirect to login
+  };
+
+  // Helper to determine active menu key
+  const getSelectedKey = () => {
+    if (location.pathname.includes("CategoryList")) return "1";
+    if (location.pathname.includes("ProductSliderList")) return "3";
+    if (location.pathname.includes("ProductList")) return "2";
+    if (location.pathname.includes("OrderListing")) return "4";
+    return "";
   };
 
   return (
@@ -34,8 +41,8 @@ const AdminLayout = () => {
         collapsible
         collapsed={collapsed}
         style={{
-          background: "#fff", // ← white background
-          boxShadow: "2px 0 8px rgba(0,0,0,0.05)", // optional shadow for depth
+          background: "#fff",
+          boxShadow: "2px 0 8px rgba(0,0,0,0.05)",
         }}
       >
         <div
@@ -68,11 +75,12 @@ const AdminLayout = () => {
         <Menu
           theme="light"
           mode="inline"
-          selectedKeys={[location.pathname.includes("recruitment") ? "2" : "1"]} // keeps highlight in sync
+          selectedKeys={[getSelectedKey()]}
           onClick={({ key }) => {
             if (key === "1") navigate("/dashboard/CategoryList");
             else if (key === "2") navigate("/dashboard/ProductList");
             else if (key === "3") navigate("/dashboard/ProductSliderList");
+            else if (key === "4") navigate("/dashboard/OrderListing");
           }}
           items={[
             {
@@ -89,6 +97,11 @@ const AdminLayout = () => {
               key: "3",
               icon: <UnorderedListOutlined />,
               label: "Slider List",
+            },
+            {
+              key: "4",
+              icon: <UnorderedListOutlined />,
+              label: "Order List",
             },
           ]}
         />
@@ -127,7 +140,7 @@ const AdminLayout = () => {
               left: 0,
               right: 0,
               textAlign: "center",
-              pointerEvents: "none", // allows clicks to pass through
+              pointerEvents: "none",
             }}
           >
             <span
@@ -137,7 +150,7 @@ const AdminLayout = () => {
                 color: "#18181b",
               }}
             >
-              Kicthen Viz Admin Dashboard
+              Kitchen Viz Admin Dashboard
             </span>
           </div>
 
@@ -147,7 +160,7 @@ const AdminLayout = () => {
             onClick={handleLogout}
             icon={<LogoutOutlined />}
             style={{
-              backgroundColor: "#f87171", // light red
+              backgroundColor: "#f87171",
               borderColor: "#f87171",
               fontWeight: "bold",
               marginRight: 16,
@@ -167,18 +180,7 @@ const AdminLayout = () => {
             boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
           }}
         >
-          <div
-          // style={{
-          //   minHeight: 200,
-          //   display: "flex",
-          //   alignItems: "center",
-          //   justifyContent: "center",
-          //   color: "#888",
-          //   fontSize: 22,
-          //   fontWeight: 500,
-          // }}
-          >
-            {/* {children} */}
+          <div>
             <Outlet />
           </div>
         </Content>

@@ -27,10 +27,13 @@ export default function ContactUs() {
             <div className="pl-4">
               <span className="block text-sm text-gray-500 mb-1">Main Office</span>
               <span className="block font-bold text-gray-900 leading-relaxed">
-                Karnataka Madiga Mahasabha<br />
+                Shiva Nilaya, Kencharayana road,<br />
+                 sigehatti, shimoga, <br />
+                  karnataka- 577202
+                {/* Karnataka Madiga Mahasabha<br />
                 #39/A, 1st Floor, near Shivananda Circle,<br />
                 Kumara Park East, Seshadripuram,<br />
-                Bengaluru, Karnataka 560001
+                Bengaluru, Karnataka 560001 */}
               </span>
             </div>
           </div>

@@ -46,6 +46,8 @@ import ProductSliderList from "./components/slider/ProductSliderList";
 import ProductSliderForm from "./components/slider/productSliderForm";
 import CheckoutForm from "./components/CheckoutForm";
 import CheckoutPage from "./components/Checkout";
+import OrderListing from "./dashboard/tables/OrderList";
+import OrderDetailsPage from "./dashboard/tables/OrderDatailsPage";
 
 const AppRouter = () => {
   const [auth, setAuth] = useState(null);
@@ -133,6 +135,9 @@ const AppRouter = () => {
               <Route path="CategoryList/edit/:id" element={<AddCategory />} />
               <Route path="ProductList" element={<ProductListing />} />
               <Route path="ProductList/add" element={<AddProduct />} />
+              <Route path="ProductList/:id" element={<AddProduct />} />
+              <Route path="OrderListing" element={<OrderListing />} />
+              <Route path="orders/:id" element={<OrderDetailsPage />} />
             </Route>
           </>
         ) : (

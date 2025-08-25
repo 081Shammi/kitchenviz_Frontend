@@ -26,10 +26,18 @@ export default function ProductSliderList() {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleDelete = (id) => {
-    // Implement delete logic here
-    message.info(`Delete slider with id: ${id}`);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${getBaseUrl()}slider/${id}`);
+      message.success("Slider deleted successfully!");
+      // Refresh the list after delete
+      setSliders(sliders => sliders.filter(s => s._id !== id));
+      // Alternatively, you could re-fetch: await axios.get... but local filter is faster UX
+    } catch (err) {
+      message.error("Failed to delete slider.");
+    }
   };
+
 
   const columns = [
     {
@@ -115,13 +123,13 @@ export default function ProductSliderList() {
       fixed: "right",
       render: (_, record) => (
         <div className="flex gap-2">
-          <Button
+          {/* <Button
             size="small"
             type="primary"
             onClick={() => navigate(`/slider/edit/${record._id}`)}
           >
             Edit
-          </Button>
+          </Button> */}
           <Popconfirm
             title="Are you sure to delete this slider?"
             onConfirm={() => handleDelete(record._id)}

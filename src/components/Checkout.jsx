@@ -5,13 +5,15 @@ import { API_BASE_URL } from "../config";
 import Footer from "./Footer";
 import Header from "./Header";
 import { message } from "antd";
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
   const cart = useSelector((state) => state.cart?.items || []);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [placingOrder, setPlacingOrder] = useState(false);
+  const navigate = useNavigate();
 
   // Fetch products to enrich cart with validated info
   useEffect(() => {
@@ -121,7 +123,8 @@ export default function CheckoutPage() {
       const data = await res.json();
       message.success("Order placed successfully!");
       toast.success("Order placed successfully!"); // Show Toastify success message
-      window.location.href = `/order-confirmation/${data.order._id || ""}`;
+      // window.location.href = `/order-confirmation/${data.order._id || ""}`;
+      navigate(`/`);
     } catch (e) {
       message.error(e.message || "Could not place order. Please try again.");
     } finally {

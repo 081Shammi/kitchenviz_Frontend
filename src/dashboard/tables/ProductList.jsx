@@ -35,7 +35,7 @@ export default function ProductListing() {
   };
 
   const handleEdit = (record) => {
-    navigate(`/product/edit/${record._id}`);
+    navigate(`/dashboard/ProductList/${record._id}`);
   };
 
   const handleDelete = async (id) => {
