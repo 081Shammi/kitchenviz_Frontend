@@ -72,14 +72,14 @@ export default function ProductDetail() {
 
   // Correct, cross-compatible add to cart logic
   const handleAddToCart = () => {
-  // Use product.id if available, fall back to _id just in case
-  const productId = product.id || product._id;
-  console.log("Adding to cart:", productId, "Quantity:", quantity);
-  
-  dispatch(addToCart({ id: productId, qty: quantity }));
-  message.success(`Added ${quantity} to cart!`);
-  navigate("/cart");
-};
+    // Use product.id if available, fall back to _id just in case
+    const productId = product.id || product._id;
+    console.log("Adding to cart:", productId, "Quantity:", quantity);
+
+    dispatch(addToCart({ id: productId, qty: quantity }));
+    message.success(`Added ${quantity} to cart!`);
+    navigate("/cart");
+  };
   return (
     <>
       <Header />
@@ -137,7 +137,7 @@ export default function ProductDetail() {
             )}
             {hasDiscount && (
               <span className="bg-[#EB1F27] text-white text-base px-3 py-1 font-semibold rounded-md">
-                  {discountPercent}% OFF
+                {discountPercent}% OFF
               </span>
             )}
           </div>
@@ -187,18 +187,66 @@ export default function ProductDetail() {
 
           <button
             className={`w-full py-3 rounded-lg text-lg font-bold shadow-sm transition
-              ${
-                product.countInStock > 0
-                  ? "bg-yellow-400 text-black hover:bg-yellow-500"
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              ${product.countInStock > 0
+                ? "bg-yellow-400 text-black hover:bg-yellow-500"
+                : "bg-gray-200 text-gray-400 cursor-not-allowed"
               }`}
             disabled={product.countInStock <= 0}
             onClick={handleAddToCart}
           >
             {product.countInStock > 0 ? "ADD TO CART" : "COMING SOON"}
           </button>
+
         </div>
       </div>
+      {/* ---- Extra Product Details Section (Full-width) ---- */}
+      {(product.key_features || product.specification || product.use_of_product || product.safety_instructions || product.varenty) && (
+        <div className="max-w-5xl mx-auto my-8 p-6 bg-white rounded-xl shadow space-y-10">
+          {product.key_features && (
+            <section>
+              <h3 className="text-2xl font-semibold mb-3 border-b border-gray-200 pb-2">Key Features</h3>
+              <p className="whitespace-pre-line text-gray-700 leading-relaxed">{product.key_features}</p>
+            </section>
+          )}
+
+          {product.specification && (
+            <section>
+              <h3 className="text-2xl font-semibold mb-3 border-b border-gray-200 pb-2">Specifications</h3>
+              <p className="whitespace-pre-line text-gray-700 leading-relaxed">{product.specification}</p>
+            </section>
+          )}
+
+          {product.use_of_product && (
+            <section>
+              <h3 className="text-2xl font-semibold mb-3 border-b border-gray-200 pb-2">
+                {product.name && product.use_of_product
+                  ? `How to Use ${product.name}`
+                  : 'Product Uses'
+                }
+              </h3>
+              <p className="whitespace-pre-line text-gray-700 leading-relaxed">
+                {product.use_of_product}
+              </p>
+            </section>
+
+          )}
+
+          {product.safety_instructions && (
+            <section>
+              <h3 className="text-2xl font-semibold mb-3 border-b border-gray-200 pb-2">Safety Instructions</h3>
+              <p className="whitespace-pre-line text-gray-700 leading-relaxed">{product.safety_instructions}</p>
+            </section>
+          )}
+
+          {product.varenty && (
+            <section>
+              <h3 className="text-2xl font-semibold mb-3 border-b border-gray-200 pb-2">Warranty & Customer Support</h3>
+              <p className="whitespace-pre-line text-gray-700 leading-relaxed">{product.varenty}</p>
+            </section>
+          )}
+        </div>
+      )}
+
       <Footer />
     </>
   );
