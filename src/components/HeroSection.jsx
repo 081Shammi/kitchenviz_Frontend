@@ -25,14 +25,19 @@ export default function CustomCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef();
   const [pause, setPause] = useState(false);
-
+  const [defaultIndex, setDefaultIndex] = React.useState(0);
   useEffect(() => {
     axios
       .get(`${API_BASE_URL}slider`)
       .then((res) => setSlides(res.data || []))
       .catch(() => setSlides([]));
   }, []);
-
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDefaultIndex((prev) => (prev + 1) % defaultImages.length);
+    }, 5000); // slide every 3 seconds
+    return () => clearInterval(timer);
+  }, []);
   const goToSlide = (index) => {
     setCurrentIndex(index);
     setPause(true);
@@ -55,8 +60,13 @@ export default function CustomCarousel() {
     }
     return () => clearInterval(intervalRef.current);
   }, [pause, slides.length]);
+  const defaultImages = [
+    "/assets/sliderpro2.png",
+    "/assets/sliderpro3.png",
+    // "/assets/default3.jpg",
+    // add more default images if you like
+  ];
 
-  
 
   const getImageUrl = (url) => {
     if (!url) return "";
@@ -64,33 +74,36 @@ export default function CustomCarousel() {
     if (url.startsWith("assets/")) return `${API_BASE_URL}${url}`;
     return `${API_BASE_URL}${url}`;
   };
-  if (!slides.length) {
-    // Show one default slide with placeholder or your default hero image
-    const defaultImageUrl = "/assets/hero3.jpg"; // or your preferred default image URL
-
-    return (
-      <section className="relative w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[600px] xl:h-[700px] flex items-center justify-center overflow-hidden bg-transparent">
-        <div className="relative w-full h-full shadow-lg bg-transparent rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 w-full h-full opacity-100 z-20" aria-hidden={false}>
+ if (!slides.length) {
+  return (
+    <section className="relative w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[600px] xl:h-[700px] flex items-center justify-center overflow-hidden bg-transparent">
+      <div className="relative w-full h-full shadow-lg bg-transparent rounded-xl overflow-hidden">
+        {defaultImages.map((img, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === defaultIndex ? "opacity-100 z-20" : "opacity-0 z-10 pointer-events-none"
+            }`}
+            aria-hidden={idx !== defaultIndex}
+          >
             <img
-              src={defaultImageUrl}
-              alt="Default hero"
+              src={img}
+              alt={`Default slide ${idx + 1}`}
               className="w-full h-full object-cover object-center"
+              draggable={false}
             />
             <div className="absolute inset-0 bg-black/25" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 via-yellow-200 to-orange-200 drop-shadow-2xl mb-6 tracking-tight leading-tight" style={{ fontFamily: "'Inter',sans-serif", textShadow: '0 4px 24px rgba(0,0,0,0.7)' }}>
-                Welcome
-              </h1>
-              <p className="text-white/90 max-w-3xl mx-auto font-medium drop-shadow-xl text-lg sm:text-2xl md:text-3xl lg:text-4xl tracking-wide mb-4" style={{ textShadow: '0 2px 12px rgba(0,0,0,0.6)' }}>
-                Explore our amazing products
-              </p>
+            {/* Optional overlay text */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-30">
+              <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">Welcome</h1>
+              <p className="text-lg text-white mt-2 drop-shadow-lg">Explore our amazing products</p>
             </div>
           </div>
-        </div>
-      </section>
-    );
-  }
+        ))}
+      </div>
+    </section>
+  );
+}
   // Transparent bg, overlay, and text as in flowbite-react
   return (
     <section className="relative w-full h-[350px] sm:h-[450px] md:h-[550px] lg:h-[600px] xl:h-[700px] flex items-center justify-center overflow-hidden bg-transparent">
@@ -140,7 +153,7 @@ export default function CustomCarousel() {
               </div>
               {slide.product?.name && slide.product?._id && (
                 console.log(slide.product),
-                
+
                 <Link
                   to={`/product/${slide.product?._id}`}
                   className="absolute bottom-[8%] right-[7vw] flex items-center gap-4 px-6 py-3 rounded-3xl bg-white/90 shadow-lg text-black font-semibold text-lg hover:bg-yellow-400 hover:text-black border border-white/60 transition select-none"
