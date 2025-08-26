@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Carousel, Spin, message } from "antd";
+import { Carousel, Spin, } from "antd";
 import { API_BASE_URL } from "../config";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../reducers/cart"; // make sure this path is correct
+import { toast } from "react-toastify";
 
 const getImageUrl = (url) => {
   if (!url) return "";
@@ -29,7 +30,7 @@ export default function ProductDetail() {
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch(() => {
-        message.error("Failed to load product.");
+        toast.error("Failed to load product.");
         setProduct(null);
       })
       .finally(() => setLoading(false));
@@ -77,7 +78,7 @@ export default function ProductDetail() {
     console.log("Adding to cart:", productId, "Quantity:", quantity);
 
     dispatch(addToCart({ id: productId, qty: quantity }));
-    message.success(`Added ${quantity} to cart!`);
+    toast.success(`Added ${quantity} to cart!`);
     navigate("/cart");
   };
   return (

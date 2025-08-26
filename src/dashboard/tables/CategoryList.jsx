@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Table, Button, Spin, Popconfirm, message } from "antd";
+import { Table, Button, Spin, Popconfirm } from "antd";
 import { API_BASE_URL } from "../../config";
+import { toast } from "react-toastify";
 
 export default function CategoryList() {
   const [categories, setCategories] = useState([]);
@@ -22,7 +23,7 @@ export default function CategoryList() {
       const res = await axios.get(API);
       setCategories(res.data);
     } catch (error) {
-      message.error("Failed to fetch categories");
+      toast.error("Failed to fetch categories");
       console.error(error);
     }
     setLoading(false);
@@ -42,10 +43,10 @@ export default function CategoryList() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API}/${id}`);
-      message.success("Category deleted");
+      toast.success("Category deleted");
       fetchCategories();
     } catch (error) {
-      message.error("Delete failed");
+      toast.error("Delete failed");
       console.error(error);
     }
   };

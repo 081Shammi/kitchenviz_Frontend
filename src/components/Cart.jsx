@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, updateCartQty } from "../reducers/cart";
 import { API_BASE_URL } from "../config";
 import Header from "./Header";
 import Footer from "./Footer";
+import { toast } from "react-toastify";
 
 const getImageUrl = (url) => {
   if (!url) return "";
@@ -42,11 +42,11 @@ export default function CartPage() {
         const validProducts = products.filter(Boolean);
         setProducts(validProducts);
         if (validProducts.length === 0) {
-          message.warning("No products found for items in cart");
+          toast.warning("No products found for items in cart");
         }
       })
       .catch(() => {
-        message.error("Failed to load products.");
+        toast.error("Failed to load products.");
         setProducts([]);
       })
       .finally(() => setLoading(false));

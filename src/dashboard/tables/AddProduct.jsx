@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
-import { Form, Input, InputNumber, Button, Upload, Select, message } from "antd";
+import { Form, Input, InputNumber, Button, Upload, Select } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { API_BASE_URL } from "../../config";
+import { toast } from "react-toastify";
 
 const { Option } = Select;
 
@@ -30,7 +31,7 @@ export default function AddProduct() {
       const { data } = await axios.get(`${API_BASE_URL}category`);
       setCategories(data);
     } catch {
-      message.error("Failed to fetch categories");
+      toast.error("Failed to fetch categories");
     }
   };
 
@@ -80,7 +81,7 @@ export default function AddProduct() {
         setUploadedImageIds(data.image.map((img) => img.id || img._id));
       }
     } catch (error) {
-      message.error("Failed to fetch product details");
+      toast.error("Failed to fetch product details");
     }
     setLoading(false);
   };
@@ -94,7 +95,7 @@ export default function AddProduct() {
 
   const uploadImages = async () => {
     if (!imageList.length) {
-      message.error("Please select images first");
+      toast.error("Please select images first");
       return;
     }
     setUploading(true);
@@ -113,9 +114,9 @@ export default function AddProduct() {
         }
       }
       setUploadedImageIds(ids);
-      message.success("Images uploaded successfully");
+      toast.success("Images uploaded successfully");
     } catch {
-      message.error("Failed to upload images");
+      toast.error("Failed to upload images");
       setUploadedImageIds([]);
     } finally {
       setUploading(false);
@@ -129,7 +130,7 @@ export default function AddProduct() {
 
   const onSubmit = async (formData) => {
     if (uploadedImageIds.length === 0) {
-      message.error("Please upload and confirm images");
+      toast.error("Please upload and confirm images");
       return;
     }
 
@@ -145,10 +146,10 @@ export default function AddProduct() {
 
       if (id) {
         await axios.put(`${API_BASE_URL}product/${id}`, payload);
-        message.success("Product updated successfully");
+        toast.success("Product updated successfully");
       } else {
         await axios.post(`${API_BASE_URL}product`, payload);
-        message.success("Product added successfully");
+        toast.success("Product added successfully");
       }
 
       reset();
@@ -156,7 +157,7 @@ export default function AddProduct() {
       setUploadedImageIds([]);
       navigate("/dashboard/ProductList");
     } catch {
-      message.error(id ? "Failed to update product" : "Failed to add product");
+      toast.error(id ? "Failed to update product" : "Failed to add product");
     } finally {
       setLoading(false);
     }

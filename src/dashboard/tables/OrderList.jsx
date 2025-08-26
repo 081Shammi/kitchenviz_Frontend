@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table, Button, Popconfirm, message, Spin } from "antd";
+import { Table, Button, Popconfirm, Spin } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
+import { toast } from "react-toastify";
 
 export default function OrderListing() {
   const [orders, setOrders] = useState([]);
@@ -22,7 +23,7 @@ export default function OrderListing() {
       const res = await axios.get(API);
       setOrders(res.data);
     } catch (error) {
-      message.error("Failed to fetch orders");
+      toast.error("Failed to fetch orders");
       console.error(error);
     } finally {
       setLoading(false);
@@ -34,10 +35,10 @@ export default function OrderListing() {
   const handleAccept = async (id) => {
     try {
       await axios.patch(`${API_BASE_URL}order/updateStatus/${id}`, { status: "accept" });
-      message.success("Order accepted");
+      toast.success("Order accepted");
       fetchOrders();
     } catch (error) {
-      message.error("Failed to accept order");
+      toast.error("Failed to accept order");
       console.error(error);
     }
   };
@@ -45,10 +46,10 @@ export default function OrderListing() {
   const handleReject = async (id) => {
     try {
       await axios.patch(`${API_BASE_URL}order/updateStatus/${id}`, { status: "reject" });
-      message.success("Order rejected");
+      toast.success("Order rejected");
       fetchOrders();
     } catch (error) {
-      message.error("Failed to reject order");
+      toast.error("Failed to reject order");
       console.error(error);
     }
   };

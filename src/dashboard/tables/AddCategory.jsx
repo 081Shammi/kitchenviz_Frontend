@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../config";
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button } from "antd";
+import { toast } from "react-toastify";
 
 export default function AddCategory() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ export default function AddCategory() {
           }
         })
         .catch((err) => {
-          message.error("Failed to load category data");
+          toast.error("Failed to load category data");
         });
     }
   }, [id]);
@@ -32,15 +33,15 @@ export default function AddCategory() {
       if (id) {
         // Edit existing category
         await axios.put(`${API_BASE_URL}category/${id}`, values);
-        message.success("Category updated successfully");
+        toast.success("Category updated successfully");
       } else {
         // Add new category
         await axios.post(`${API_BASE_URL}category`, values);
-        message.success("Category added successfully");
+        toast.success("Category added successfully");
       }
       navigate("/dashboard/CategoryList");
     } catch (error) {
-      message.error("Failed to save category");
+      toast.error("Failed to save category");
       console.error(error);
     }
     setLoading(false);
