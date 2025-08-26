@@ -15,13 +15,10 @@ import ExchangePolicy from "./pages/ExchangePolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import ImportantNotes from "./pages/ImportantNotes";
 import ContactUsPage from "./pages/ReachUs";
-import RequestQuoteForm from "./components/forms/RequestQuoteForm";
-import RecruitmentForm from "./components/forms/RecruitmentForm";
 import Login from "./components/login/LoginForm";
 import ProductDetail from "./components/ProductDetails";
 import CartPage from "./components/Cart";
 import CheckoutPage from "./components/Checkout";
-import Get from "./components/forms/Get";
 
 // Dashboard pages
 import AdminLayout from "./layout/Layout";
@@ -98,9 +95,7 @@ const AppRouter = () => {
             <Route path="/exclusions" element={<Exclusions />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/recruitment" element={<RecruitmentForm />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/get" element={<Get />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </>
         ) : isAdmin ? (
