@@ -144,19 +144,22 @@ export default function ProductList() {
                   </div>
                   <div className="flex flex-col gap-2 mt-auto">
                     <button
-                      className="w-full text-white rounded-xl py-2 text-base bg-yellow-500 hover:bg-yellow-700 transition"
-                      style={{ fontFamily: "monospace", color: "white" }}
+                      className="w-full font-mono text-white rounded-xl py-2 text-base bg-yellow-400 hover:bg-yellow-700 transition"
+                      onClick={() => handleAddToCart(product)}
+                      disabled={product.countInStock <= 0}
+                      style={{ fontFamily: "monospace" ,color:"white"}}
                     >
                       ADD TO CART
                     </button>
 
                     <button
-                      className="w-full text-white rounded-xl py-2 text-base bg-red-600 hover:bg-red-900 transition"
-                      style={{ fontFamily: "monospace", color: "white" }}
+                      className="w-full font-mono text-white rounded-xl py-2 text-base bg-red-600 hover:bg-red-900 transition"
+                      onClick={() => handleBuyNow(product)}
+                      disabled={product.countInStock <= 0}
+                      style={{ fontFamily: "monospace" ,color:"white"}}
                     >
                       BUY NOW
                     </button>
-
 
                   </div>
                 </div>
