@@ -58,9 +58,9 @@ export default function ProductList() {
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-12 lg:py-20 bg-gray-50">
+      <h1 className="text-3xl font-extrabold text-gray-900 mb-10">Products</h1>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
         {/* <Button onClick={() => message.success('Test message!')}>Test Toast</Button> */}
-
         {products.map((product) => {
           let hasDiscount =
             typeof product.productDiscountedPrice === "number" &&
@@ -147,7 +147,7 @@ export default function ProductList() {
                       className="w-full font-mono text-white rounded-xl py-2 text-base bg-yellow-400 hover:bg-yellow-700 transition"
                       onClick={() => handleAddToCart(product)}
                       disabled={product.countInStock <= 0}
-                      style={{ fontFamily: "monospace" ,color:"white"}}
+                      style={{ fontFamily: "monospace", color: "white" }}
                     >
                       ADD TO CART
                     </button>
@@ -156,7 +156,7 @@ export default function ProductList() {
                       className="w-full font-mono text-white rounded-xl py-2 text-base bg-red-600 hover:bg-red-900 transition"
                       onClick={() => handleBuyNow(product)}
                       disabled={product.countInStock <= 0}
-                      style={{ fontFamily: "monospace" ,color:"white"}}
+                      style={{ fontFamily: "monospace", color: "white" }}
                     >
                       BUY NOW
                     </button>
