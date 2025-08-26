@@ -27,6 +27,8 @@ import storage from "redux-persist/lib/storage";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/reset.css";
 // import {thunk} from 'redux-thunk';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const reducers = combineReducers({
   user: userReducer,
@@ -56,6 +58,18 @@ createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
+      <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            />
         <App />
       </BrowserRouter>
     </PersistGate>

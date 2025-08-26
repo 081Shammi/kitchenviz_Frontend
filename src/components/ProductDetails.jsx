@@ -6,6 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../reducers/cart"; // make sure this path is correct
+import { toast } from "react-toastify";
 
 const getImageUrl = (url) => {
   if (!url) return "";
@@ -77,7 +78,7 @@ export default function ProductDetail() {
   console.log("Adding to cart:", productId, "Quantity:", quantity);
   
   dispatch(addToCart({ id: productId, qty: quantity }));
-  message.success(`Added ${quantity} to cart!`);
+  toast.success(`Added ${quantity} to cart!`);
   navigate("/cart");
 };
   return (
