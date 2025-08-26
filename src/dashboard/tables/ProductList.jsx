@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Table, Button, Spin, Popconfirm, message, Carousel } from "antd";
+import { Table, Button, Spin, Popconfirm, Carousel } from "antd";
 import { API_BASE_URL } from "../../config";
 
 export default function ProductListing() {
@@ -22,7 +22,7 @@ export default function ProductListing() {
       const res = await axios.get(API);
       setProducts(res.data);
     } catch (error) {
-      message.error("Failed to fetch products");
+      toast.error("Failed to fetch products");
       console.error(error);
     }
     setLoading(false);
@@ -41,10 +41,10 @@ export default function ProductListing() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API}/${id}`);
-      message.success("Product deleted");
+      toast.success("Product deleted");
       fetchProducts();
     } catch (error) {
-      message.error("Delete failed");
+      toast.error("Delete failed");
       console.error(error);
     }
   };

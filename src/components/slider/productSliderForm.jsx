@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
-import { Form, Input, Button, Upload, Select, message } from "antd";
+import { Form, Input, Button, Upload, Select } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../config";
+import { toast } from "react-toastify";
 
 const { Option } = Select;
 
@@ -33,7 +34,7 @@ export default function ProductSliderForm() {
         const res = await axios.get(`${getBaseUrl()}product`);
         setProductOptions(res.data);
       } catch {
-        message.error("Failed to load products");
+        toast.error("Failed to load products");
       }
     }
     fetchProducts();
@@ -58,10 +59,10 @@ export default function ProductSliderForm() {
       });
       const mediaIds = await Promise.all(uploadPromises);
       setUploadedMediaIds(mediaIds);
-      message.success("Images uploaded successfully");
+      toast.success("Images uploaded successfully");
       return mediaIds;
     } catch {
-      message.error("Image upload failed");
+      toast.error("Image upload failed");
       return [];
     } finally {
       setUploading(false);
@@ -71,7 +72,7 @@ export default function ProductSliderForm() {
   // On form submit, upload images if not done yet, then submit payload
   const onSubmit = async (data) => {
     if (fileList.length === 0) {
-      message.error("Please upload at least one image");
+      toast.error("Please upload at least one image");
       return;
     }
     let mediaIds = uploadedMediaIds;
@@ -89,13 +90,13 @@ export default function ProductSliderForm() {
 
     try {
       await axios.post(`${getBaseUrl()}slider`, payload);
-      message.success("Slider added successfully");
+      toast.success("Slider added successfully");
       reset();
       setFileList([]);
       setUploadedMediaIds([]);
       navigate("/dashboard/ProductSliderList");
     } catch {
-      message.error("Failed to add slider");
+      toast.error("Failed to add slider");
     }
   };
 

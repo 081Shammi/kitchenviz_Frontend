@@ -1,53 +1,45 @@
-import { useLocation } from "react-router-dom";
-// Scroll to top on route change
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-}
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate, Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route, useLocation } from "react-router-dom";
 import verifyToken from "./verifyjwt";
 import { ROLES } from "./config";
 import 'react-toastify/dist/ReactToastify.css';
 
 // Public pages
 import HomePage from "./pages/HomePage";
-import RequestQuoteForm from "./components/forms/RequestQuoteForm";
-import RecruitmentForm from "./components/forms/RecruitmentForm";
-import Login from "./components/login/LoginForm";
-import ProductDetail from "./components/ProductDetails";
-// Dashboard pages
-import RootOutlet from "./dashboard/RootOutlet";
-import DefaultOutlet from "./dashboard/DefaultOutlet";
-import GetQuoteinfo from "./dashboard/tables/GetQuoteinfo";
-import Recruitmentinfo from "./dashboard/tables/Recruitmentinfo";
-import AdminLayout from "./layout/Layout";
-import Get from "./components/forms/Get";
-import { i } from "motion/react-client";
 import AboutUsPage from "./pages/AboutUs";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import Exclusions from "./pages/Exclusions";
 import ExchangePolicy from "./pages/ExchangePolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
-import HowToReachUs from "./pages/ReachUs";
 import ImportantNotes from "./pages/ImportantNotes";
 import ContactUsPage from "./pages/ReachUs";
+import Login from "./components/login/LoginForm";
+import ProductDetail from "./components/ProductDetails";
+import CartPage from "./components/Cart";
+import CheckoutPage from "./components/Checkout";
+
+// Dashboard pages
+import AdminLayout from "./layout/Layout";
 import CategoryList from "./dashboard/tables/CategoryList";
 import AddCategory from "./dashboard/tables/AddCategory";
 import ProductListing from "./dashboard/tables/ProductList";
 import AddProduct from "./dashboard/tables/AddProduct";
-import CartPage from "./components/Cart";
 import ProductSliderList from "./components/slider/ProductSliderList";
 import ProductSliderForm from "./components/slider/productSliderForm";
-import CheckoutForm from "./components/CheckoutForm";
-import CheckoutPage from "./components/Checkout";
 import OrderListing from "./dashboard/tables/OrderList";
 import OrderDetailsPage from "./dashboard/tables/OrderDatailsPage";
+import { ToastContainer } from "react-toastify";
+
+// ✅ ScrollToTop on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 const AppRouter = () => {
   const [auth, setAuth] = useState(null);
@@ -55,19 +47,14 @@ const AppRouter = () => {
   const user = useSelector((state) => state.user.value);
 
   const isAdmin = ROLES.ADMIN === user?.role;
-  localStorage.removeItem("cart");
+
   useEffect(() => {
     function checkAuth() {
       try {
         setIsLoading(true);
-
         if (user?.is_logged_in && user?.access_token) {
           const checkToken = verifyToken(user.access_token);
-          if (checkToken?.status === true) {
-            setAuth(true);
-          } else {
-            setAuth(false);
-          }
+          setAuth(checkToken?.status === true);
         } else {
           setAuth(false);
         }
@@ -78,21 +65,12 @@ const AppRouter = () => {
         setIsLoading(false);
       }
     }
-
     checkAuth();
   }, [user?.is_logged_in, user?.access_token]);
 
   if (isLoading || auth === null) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          fontSize: "18px",
-        }}
-      >
+      <div className="flex justify-center items-center h-screen text-lg">
         Loading...
       </div>
     );
@@ -102,7 +80,7 @@ const AppRouter = () => {
     <>
       <ScrollToTop />
       <Routes>
-        {/* If NOT logged in → show public pages */}
+        {/* Not logged in → Public Pages */}
         {!auth ? (
           <>
             <Route path="/" element={<HomePage />} />
@@ -116,38 +94,34 @@ const AppRouter = () => {
             <Route path="/important-notes" element={<ImportantNotes />} />
             <Route path="/exclusions" element={<Exclusions />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/CheckoutPage" element={<CheckoutPage />} />
-            <Route path="/recruitment" element={<RecruitmentForm />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/get" element={<Get />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </>
         ) : isAdmin ? (
-          /* If logged in & admin → allow dashboard */
-          <>
-            <Route path="/dashboard" element={<AdminLayout />}>
-              <Route index element={<Navigate to="CategoryList" replace />} />
-              <Route path="CategoryList" element={<CategoryList />} />
-              <Route path="CategoryList/add" element={<AddCategory />} />
-              <Route path="ProductSliderList" element={<ProductSliderList />} />
-              <Route path="ProductSliderList/add" element={<ProductSliderForm />} />
-              <Route path="CategoryList/add" element={<AddCategory />} />
-              <Route path="CategoryList/edit/:id" element={<AddCategory />} />
-              <Route path="ProductList" element={<ProductListing />} />
-              <Route path="ProductList/add" element={<AddProduct />} />
-              <Route path="ProductList/:id" element={<AddProduct />} />
-              <Route path="OrderListing" element={<OrderListing />} />
-              <Route path="orders/:id" element={<OrderDetailsPage />} />
-            </Route>
-          </>
+          /* Logged in as ADMIN */
+          <Route path="/dashboard" element={<AdminLayout />}>
+            <Route index element={<Navigate to="CategoryList" replace />} />
+            <Route path="CategoryList" element={<CategoryList />} />
+            <Route path="CategoryList/add" element={<AddCategory />} />
+            <Route path="CategoryList/edit/:id" element={<AddCategory />} />
+            <Route path="ProductSliderList" element={<ProductSliderList />} />
+            <Route path="ProductSliderList/add" element={<ProductSliderForm />} />
+            <Route path="ProductList" element={<ProductListing />} />
+            <Route path="ProductList/add" element={<AddProduct />} />
+            <Route path="ProductList/:id" element={<AddProduct />} />
+            <Route path="OrderListing" element={<OrderListing />} />
+            <Route path="orders/:id" element={<OrderDetailsPage />} />
+          </Route>
         ) : (
-          /* If logged in but NOT admin → redirect to home or logout */
+          /* Logged in but NOT admin */
           <>
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </>
         )}
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 };

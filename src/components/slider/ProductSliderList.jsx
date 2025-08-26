@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Spin, Popconfirm, message, Carousel } from "antd";
+import { Table, Button, Spin, Popconfirm, Carousel } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../config";
+import { toast } from "react-toastify";
 
 const getBaseUrl = () => API_BASE_URL;
 
@@ -22,19 +23,19 @@ export default function ProductSliderList() {
     axios
       .get(`${getBaseUrl()}slider`)
       .then((res) => setSliders(res.data))
-      .catch(() => message.error("Failed to load sliders"))
+      .catch(() => toast.error("Failed to load sliders"))
       .finally(() => setLoading(false));
   }, []);
 
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${getBaseUrl()}slider/${id}`);
-      message.success("Slider deleted successfully!");
+      toast.success("Slider deleted successfully!");
       // Refresh the list after delete
       setSliders(sliders => sliders.filter(s => s._id !== id));
       // Alternatively, you could re-fetch: await axios.get... but local filter is faster UX
     } catch (err) {
-      message.error("Failed to delete slider.");
+      toast.error("Failed to delete slider.");
     }
   };
 

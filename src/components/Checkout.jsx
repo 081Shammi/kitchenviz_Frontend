@@ -152,9 +152,7 @@ import CheckoutForm from "./CheckoutForm";
 import { API_BASE_URL } from "../config";
 import Footer from "./Footer";
 import Header from "./Header";
-import { ToastContainer, toast } from 'react-toastify';
-import { message } from "antd";
-// import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
@@ -172,7 +170,7 @@ export default function CheckoutPage() {
         const data = await res.json();
         setProducts(data);
       } catch (e) {
-        message.error("Failed to fetch products for checkout");
+        toast.error("Failed to fetch products for checkout");
       } finally {
         setLoading(false);
       }
@@ -363,12 +361,11 @@ export default function CheckoutPage() {
       }
 
       const data = await res.json();
-      message.success("Order placed successfully!");
-      toast.success("Order placed successfully!"); // Show Toastify success message
+      toast.success("Order placed successfully!");
       // window.location.href = `/order-confirmation/${data.order._id || ""}`;
       navigate(`/`);
     } catch (e) {
-      message.error(e.message || "Could not place order. Please try again.");
+      toast.error(e.message || "Could not place order. Please try again.");
     } finally {
       setPlacingOrder(false);
     }

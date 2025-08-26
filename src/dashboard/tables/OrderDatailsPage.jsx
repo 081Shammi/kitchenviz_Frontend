@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API_BASE_URL } from "../../config";
-import { Spin, message } from "antd";
+import { Spin } from "antd";
+import { toast } from "react-toastify";
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -28,7 +29,7 @@ export default function OrderDetails() {
       const res = await axios.get(`${API_BASE_URL}order/${id}`);
       setOrder(res.data);
     } catch {
-      message.error("Failed to fetch order details");
+      toast.error("Failed to fetch order details");
     } finally {
       setLoading(false);
     }
@@ -39,10 +40,10 @@ export default function OrderDetails() {
     setUpdating(true);
     try {
       await axios.patch(`${API_BASE_URL}order/updateShippingStatus/${order._id}`, { status });
-      message.success(`Order marked as ${status.replace(/([A-Z])/g, " $1").trim()}`);
+      toast.success(`Order marked as ${status.replace(/([A-Z])/g, " $1").trim()}`);
       await fetchOrder();
     } catch {
-      message.error("Failed to update order status");
+      toast.error("Failed to update order status");
     } finally {
       setUpdating(false);
     }
