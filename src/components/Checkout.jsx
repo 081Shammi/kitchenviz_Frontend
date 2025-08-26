@@ -135,12 +135,14 @@ export default function CheckoutPage() {
   return (
     <>
       <Header />
-      <CheckoutForm
-        cartItems={enrichedCartItems}
-        totalAmount={totalAmount}
-        onSubmit={handleOrderSubmit}
-        loading={placingOrder}
-      />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[6.30rem] space-y-12">
+        <CheckoutForm
+          cartItems={enrichedCartItems}
+          totalAmount={totalAmount}
+          onSubmit={handleOrderSubmit}
+          loading={placingOrder}
+        />
+      </main>
       <Footer />
       <ToastContainer position="top-right" autoClose={3000} />
 

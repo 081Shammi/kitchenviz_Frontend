@@ -110,6 +110,7 @@ export default function CartPage() {
   return (
     <>
       <Header />
+      <main className="mt-[110px]">
       <div className="max-w-3xl mx-auto my-6 px-2 w-full">
         <div className="bg-white rounded-xl shadow p-2 sm:p-4 md:p-7">
           <h2 className="text-2xl font-bold mb-6 text-center md:text-left">Shopping Cart</h2>
@@ -216,13 +217,15 @@ export default function CartPage() {
             </div>
             <button
               className="bg-yellow-400 text-black font-bold px-8 py-3 rounded-lg shadow hover:bg-yellow-300 text-base w-full sm:w-auto"
-              onClick={() => navigate("/CheckoutPage")}
+              onClick={() => navigate("/checkout")}
             >
               Proceed to Checkout
             </button>
           </div>
         </div>
       </div>
+        
+      </main>
       <Footer />
     </>
   );

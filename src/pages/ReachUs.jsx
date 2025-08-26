@@ -6,7 +6,7 @@ export default function ContactUs() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8 font-sans">
+      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4 sm:px-6 lg:px-8 font-sans mt-[100px]">
         <div className="max-w-3xl mx-auto text-center mb-10">
           <h1 className="text-4xl font-extrabold mb-3 text-gray-900">Contact Us</h1>
           <p className="text-lg text-gray-600">

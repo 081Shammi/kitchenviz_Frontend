@@ -42,9 +42,10 @@ const mission = `Our mission is to transform everyday cooking by delivering slee
 
 const AboutUsPage = () => {
   return (
-    <div className="font-sans bg-gray-50 min-h-screen">
-      <Header />
-      <main className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center pt-10 pb-16">
+    <>
+    <Header />
+    <div className="font-sans bg-white min-h-screen">
+      <main className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center pt-[6.30rem] pb-16 mt-16">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-yellow-600 text-center mb-8 drop-shadow-sm">
           Welcome to Kitchen Viz
         </h1>
@@ -82,6 +83,8 @@ const AboutUsPage = () => {
       </main>
       <Footer />
     </div>
+    
+    </>
   );
 };
 
