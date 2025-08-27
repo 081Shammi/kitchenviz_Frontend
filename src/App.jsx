@@ -31,6 +31,7 @@ import ProductSliderForm from "./components/slider/productSliderForm";
 import OrderListing from "./dashboard/tables/OrderList";
 import OrderDetailsPage from "./dashboard/tables/OrderDatailsPage";
 import { ToastContainer } from "react-toastify";
+import RefundPolicy from "./pages/RefundPolicy";
 
 // ✅ ScrollToTop on route change
 function ScrollToTop() {
@@ -87,6 +88,7 @@ const AppRouter = () => {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/about-us" element={<AboutUsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/return-policy" element={<ReturnPolicy />} />
             <Route path="/exchange-policy" element={<ExchangePolicy />} />
