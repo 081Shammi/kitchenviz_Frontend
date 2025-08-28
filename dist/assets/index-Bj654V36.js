@@ -484,7 +484,7 @@ html body {
 
 <p>Kitchen Viz disclaims all warranties regarding the website and its content. We do not guarantee uninterrupted or error-free access. To the fullest extent permitted by law, we are not liable for any damages resulting from your use of the site. This includes direct, indirect, incidental, or consequential losses. Your use of this website is entirely at your own risk.</p>
 
-<p>We comply with Indian laws, and any disputes arising from the use of the site shall be governed by the laws of India. You agree that any legal proceedings will take place in the courts located in [Insert City, India]. These Terms constitute the entire agreement between you and Kitchen Viz regarding website usage and override any previous agreements.</p>
+<p>We comply with Indian laws, and any disputes arising from the use of the site shall be governed by the laws of India. You agree that any legal proceedings will take place in the courts located in Shimoga, Karnataka, India. These Terms constitute the entire agreement between you and Kitchen Viz regarding website usage and override any previous agreements.</p>
 
 <p>We may revise these Terms at any time by updating this page. Continued use of the site indicates your acceptance of the latest version. We encourage users to check this page regularly. If any part of these Terms is found to be unenforceable, the remaining parts will still apply. If you have questions or concerns, please email us at <a href="mailto:kitchenvission@gmail.com" class="text-indigo-600 underline">kitchenvission@gmail.com</a>.</p>
 
