@@ -154,41 +154,46 @@ export default function ProductSliderList() {
     );
   }
 
-  if (!sliders.length) {
-    return (
-      <div className="text-center py-10">
-        No sliders found.
-      </div>
-    );
-  }
+  // if (!sliders.length) {
+  //   return (
+  //     <div className="text-center py-10">
+  //       No sliders found.
+  //     </div>
+  //   );
+  // }
 
   return (
-  <div className="p-6">
-    <div className="flex justify-between items-center mb-6">
-      <h2 className="text-2xl font-bold">Sliders</h2>
-      <Button
-        type="primary"
-        onClick={() => navigate("/dashboard/ProductSliderList/add")}
-      >
-        + Add Slider
-      </Button>
-    </div>
-
-    {sliders.length === 0 ? (
-      <div className="p-6 text-center text-gray-500">
-        No sliders available. Please add new sliders.
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold">Sliders</h2>
+        <Button
+          type="primary"
+          onClick={() => navigate("/dashboard/ProductSliderList/add")}
+        >
+          + Add Slider
+        </Button>
       </div>
-    ) : (
-      <Table
-        columns={columns}
-        dataSource={sliders}
-        rowKey={(record) => record._id}
-        pagination={{ pageSize: 10 }}
-        scroll={{ x: 900 }}
-        bordered
-      />
-    )}
-  </div>
-);
+
+      {loading ? (
+        <div className="w-full flex justify-center items-center min-h-[300px]">
+          <Spin size="large" />
+        </div>
+      ) : sliders.length === 0 ? (
+        <div className="p-6 text-center text-gray-500">
+          No sliders available. Please add new sliders.
+        </div>
+      ) : (
+        <Table
+          columns={columns}
+          dataSource={sliders}
+          rowKey={record => record._id}
+          pagination={{ pageSize: 10 }}
+          scroll={{ x: 900 }}
+          bordered
+        />
+      )}
+    </div>
+  );
+
 
 }

@@ -311,7 +311,7 @@ export default function Header() {
     onClick={() => setMenuOpen(!menuOpen)}
     aria-label="Toggle navigation menu"
     className={`md:hidden flex flex-col space-y-1 w-7 h-7 justify-center items-center cursor-pointer ${scrolled ? "text-gray-900" : "text-white"}`}
-    style={{ minWidth: 44, minHeight: 44,color: scrolled ? "#1a1a1a" : "#fff"  }} // Increase tap area
+    style={{ minWidth: 44, minHeight: 44,color: "#1a1a1a"   }} // Increase tap area
   >
     <span
       className={`block h-0.5 w-full bg-current rounded transform transition duration-300 ease-in-out ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
