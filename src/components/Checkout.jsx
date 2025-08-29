@@ -124,7 +124,7 @@ export default function CheckoutPage() {
       console.log( "give me url" ,data.checkoutPageUrl);
       
       // window.location.href = `/order-confirmation/${data.order._id || ""}`;
-      // window.location.href = data.checkoutPageUrl;
+      window.location.href = data.checkoutPageUrl;
     } catch (e) {
       toast.error(e.message || "Could not place order. Please try again.");
     } 
