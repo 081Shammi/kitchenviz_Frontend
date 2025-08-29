@@ -114,20 +114,20 @@ export default function CheckoutPage() {
         body: JSON.stringify(orderData),
       });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Order placement failed");
-      }
+      // if (!res.success) {
+      //   const errorData = await res.json();
+      //   throw new Error(errorData.message || "Order placement failed");
+      // }
 
       const data = await res.json();
       toast.success("Order placed successfully!");
+      console.log( "give me url" ,data.checkoutPageUrl);
+      
       // window.location.href = `/order-confirmation/${data.order._id || ""}`;
-      navigate(`/`);
+      window.location.href = data.checkoutPageUrl;
     } catch (e) {
       toast.error(e.message || "Could not place order. Please try again.");
-    } finally {
-      setPlacingOrder(false);
-    }
+    } 
   };
 
   if (loading) return <div>Loading...</div>;

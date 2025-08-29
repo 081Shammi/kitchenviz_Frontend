@@ -32,6 +32,8 @@ import OrderListing from "./dashboard/tables/OrderList";
 import OrderDetailsPage from "./dashboard/tables/OrderDatailsPage";
 import { ToastContainer } from "react-toastify";
 import RefundPolicy from "./pages/RefundPolicy";
+import Success from "./components/Success";
+import Failure from "./components/Failure";
 
 // ✅ ScrollToTop on route change
 function ScrollToTop() {
@@ -97,6 +99,8 @@ const AppRouter = () => {
             <Route path="/exclusions" element={<Exclusions />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/payment-success" element={<Success/>} />
+            <Route path="/payment-failure" element={<Failure/>} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </>
