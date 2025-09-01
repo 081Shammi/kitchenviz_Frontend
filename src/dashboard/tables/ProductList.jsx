@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Table, Button, Spin, Popconfirm, Carousel } from "antd";
 import { API_BASE_URL } from "../../config";
+// import { toast } from "react-toastify"; // Uncomment if using toast
 
 export default function ProductListing() {
   const [products, setProducts] = useState([]);
@@ -22,7 +23,7 @@ export default function ProductListing() {
       const res = await axios.get(API);
       setProducts(res.data);
     } catch (error) {
-      toast.error("Failed to fetch products");
+      // toast.error("Failed to fetch products");
       console.error(error);
     }
     setLoading(false);
@@ -41,10 +42,10 @@ export default function ProductListing() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API}/${id}`);
-      toast.success("Product deleted");
+      // toast.success("Product deleted");
       fetchProducts();
     } catch (error) {
-      toast.error("Delete failed");
+      // toast.error("Delete failed");
       console.error(error);
     }
   };
@@ -56,9 +57,8 @@ export default function ProductListing() {
   const handleAddProduct = () => {
     navigate("/dashboard/ProductList/add");
   };
-  const getImageUrl = (url) => {
-    console.log("url>>>>>>>>", url);
 
+  const getImageUrl = (url) => {
     if (!url) return "";
     if (url.startsWith("http")) return url;
     if (url.startsWith("assets/")) {
@@ -66,55 +66,47 @@ export default function ProductListing() {
     }
     return `${API_BASE_URL}${url}`;
   };
+
   const columns = [
     {
       title: "Sl. No.",
       key: "index",
       render: (text, record, index) => (current - 1) * pageSize + index + 1,
       width: 80,
+      responsive: ['xs', 'sm', 'md', 'lg'],
     },
     {
       title: "Product Name",
       dataIndex: "name",
       key: "name",
-      width: 200,
+      width: 220,
       render: (text, record) => {
-        // Safety: Only attempt if images exist and array is not empty
         const images = Array.isArray(record.image) ? record.image : [];
-        const getImageUrl = (url) => {
-          if (!url) return "";
-          if (url.startsWith("http")) return url;
-          if (url.startsWith("assets/")) {
-            return `${API_BASE_URL}${url}`;
-          }
-          return `${API_BASE_URL}${url}`;
-        };
-
-        // If more than one image, show slider. Else show single image.
         return (
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col xs:flex-row sm:flex-row items-center gap-2 min-w-[150px]">
             {images.length > 1 ? (
-              <Carousel
-                dots={false}
-                arrows
-                style={{ width: 50, height: 50 }}
-                autoplay={true}      // <-- Enable auto-scrolling
-                autoplaySpeed={2000} // <-- Optional: set speed in ms (e.g. 2 seconds)
-                draggable
-              >
-                {images.map((imgObj, idx) => (
-                  <div key={imgObj._id || idx}>
-                    <img
-                      src={getImageUrl(imgObj?.image_url?.thumbnail?.low_res)}
-                      alt={text || record?.name?.original || "Product Image"}
-                      style={{ width: 50, height: 50, objectFit: "cover", borderRadius: 6 }}
-                      onError={(e) => { e.currentTarget.style.display = "none"; }}
-                    />
-                  </div>
-                ))}
-              </Carousel>
+              <div className="w-[50px] h-[50px]">
+                <Carousel
+                  dots={false}
+                  arrows
+                  style={{ width: 50, height: 50 }}
+                  autoplay={true}
+                  autoplaySpeed={2000}
+                  draggable
+                >
+                  {images.map((imgObj, idx) => (
+                    <div key={imgObj._id || idx}>
+                      <img
+                        src={getImageUrl(imgObj?.image_url?.thumbnail?.low_res)}
+                        alt={text || record?.name?.original || "Product Image"}
+                        style={{ width: 50, height: 50, objectFit: "cover", borderRadius: 6 }}
+                        onError={(e) => { e.currentTarget.style.display = "none"; }}
+                      />
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
             ) : (
-              // one or zero image
               <img
                 src={getImageUrl(images[0]?.image_url?.thumbnail?.low_res)}
                 alt={text || record?.name?.original || "Product Image"}
@@ -122,7 +114,7 @@ export default function ProductListing() {
                 onError={(e) => { e.currentTarget.style.display = "none"; }}
               />
             )}
-            <span>{text}</span>
+            <span className="text-xs sm:text-sm font-medium break-all max-w-[120px]">{text}</span>
           </div>
         );
       },
@@ -131,15 +123,21 @@ export default function ProductListing() {
       title: "Category",
       dataIndex: "category",
       key: "category",
-      width: 150,
+      width: 120,
       render: (category) => category || "Uncategorized",
     },
-    { title: "Price", dataIndex: "price", key: "price", width: 100, render: (val) => `₹${val}` },
+    {
+      title: "Price",
+      dataIndex: "price",
+      key: "price",
+      width: 90,
+      render: (val) => `₹${val}`,
+    },
     {
       title: "Discounted Price",
       dataIndex: "productDiscountedPrice",
       key: "productDiscountedPrice",
-      width: 140,
+      width: 120,
       render: (val) => (val ? `₹${val}` : "-"),
     },
     {
@@ -152,9 +150,9 @@ export default function ProductListing() {
       title: "Actions",
       key: "actions",
       fixed: "right",
-      width: 140,
+      width: 120,
       render: (text, record) => (
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
           <Button type="primary" size="small" onClick={() => handleEdit(record)}>
             Edit
           </Button>
@@ -174,10 +172,10 @@ export default function ProductListing() {
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2 style={{ textAlign: "center", marginBottom: 24 }}>Product Listing</h2>
+    <div className="px-2 py-4 sm:px-6 lg:px-8">
+      <h2 className="text-xl sm:text-2xl font-bold text-center mb-4">Product Listing</h2>
 
-      <div style={{ marginBottom: 16, display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+      <div className="mb-4 flex flex-wrap gap-2 justify-end">
         <Button type="primary" onClick={handleAddCategory}>
           Add Category
         </Button>
@@ -186,23 +184,29 @@ export default function ProductListing() {
         </Button>
       </div>
 
-      {loading ? (
-        <Spin size="large" style={{ display: "block", margin: "auto" }} />
-      ) : (
-        <Table
-          columns={columns}
-          dataSource={paginatedData}
-          rowKey={(record) => record.id}
-          pagination={{
-            current,
-            pageSize,
-            total: products.length,
-            onChange: handlePageChange,
-          }}
-          scroll={{ x: 900 }}
-          bordered
-        />
-      )}
+      <div className="overflow-x-auto bg-white rounded-lg shadow">
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={paginatedData}
+            rowKey={(record) => record._id || record.id}
+            pagination={{
+              current,
+              pageSize,
+              total: products.length,
+              onChange: handlePageChange,
+              showSizeChanger: false,
+            }}
+            scroll={{ x: 800 }}
+            bordered
+            className="min-w-[650px]"
+          />
+        )}
+      </div>
     </div>
   );
 }

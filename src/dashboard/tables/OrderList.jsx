@@ -58,88 +58,6 @@ export default function OrderListing() {
     setCurrent(page);
   };
 
-  // const columns = [
-  //   {
-  //     title: "Order ID",
-  //     dataIndex: "_id",
-  //     key: "_id",
-  //     width: 220,
-  //     render: (id) => id.slice(-6).toUpperCase(), // Shortened ID for display
-  //   },
-  //   {
-  //     title: "Customer Name",
-  //     dataIndex: "customerName",
-  //     key: "customerName",
-  //     width: 180,
-  //   },
-  //   {
-  //     title: "Items",
-  //     dataIndex: "items",
-  //     key: "items",
-  //     width: 340,
-  //     render: (items) => (
-  //       <ul style={{ maxHeight: 80, overflowY: "auto", paddingLeft: 16 }}>
-  //         {items.map((item) => (
-  //           <li key={item.productId}>
-  //             {item.name} x {item.qty}
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     ),
-  //   },
-  //   {
-  //     title: "Total Amount (₹)",
-  //     dataIndex: "totalAmount",
-  //     key: "totalAmount",
-  //     width: 140,
-  //     render: (amount) => amount.toFixed(2),
-  //   },
-  //   {
-  //     title: "Status",
-  //     dataIndex: "status",
-  //     key: "status",
-  //     width: 120,
-  //     render: (status) => {
-  //       let color = "gray";
-  //       if (status === "Accepted") color = "green";
-  //       else if (status === "Rejected") color = "red";
-  //       return <span style={{ color, fontWeight: "bold" }}>{status}</span>;
-  //     },
-  //   },
-  //   {
-  //     title: "Actions",
-  //     key: "actions",
-  //     width: 200,
-  //     fixed: "right",
-  //     render: (_, record) => (
-  //       <div className="flex space-x-2">
-  //         <Button
-  //           type="primary"
-  //           size="small"
-  //           disabled={record.status === "Accepted"}
-  //           onClick={() => handleAccept(record._id)}
-  //         >
-  //           Accept
-  //         </Button>
-  //         <Popconfirm
-  //           title="Are you sure to reject this order?"
-  //           onConfirm={() => handleReject(record._id)}
-  //           okText="Yes"
-  //           cancelText="No"
-  //           disabled={record.status === "Rejected"}
-  //         >
-  //           <Button
-  //             danger
-  //             size="small"
-  //             disabled={record.status === "Rejected"}
-  //           >
-  //             Reject
-  //           </Button>
-  //         </Popconfirm>
-  //       </div>
-  //     ),
-  //   },
-  // ];
   const columns = [
     {
       title: "Order ID",
@@ -152,9 +70,17 @@ export default function OrderListing() {
       title: "Customer",
       dataIndex: ["shippingAddress", "fullName"],
       key: "customerName",
-      width: 130,
+      width: 150,
       render: (text, record) => record.shippingAddress?.fullName || "N/A",
     },
+    {
+      title: "Age",
+      dataIndex: ["contactDetails", "age"],
+      key: "age",
+      width: 150,
+      render: (text, record) => record.contactDetails?.age || "N/A",
+    },
+    
     {
       title: "Email",
       dataIndex: ["contactDetails", "email"],
@@ -211,12 +137,11 @@ export default function OrderListing() {
       title: "Actions",
       key: "actions",
       fixed: "right",
-      width: 260, // Adjust width as needed for 3 buttons
+      width: 260,
       render: (_, record) => {
-        // Accepted
         if (record.isOrderAccepted) {
           return (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
               <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 font-semibold">
                 Accepted
               </span>
@@ -234,10 +159,9 @@ export default function OrderListing() {
             </div>
           );
         }
-        // Rejected
         if (record.isOrderRejected) {
           return (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
               <span className="inline-block px-4 py-1 rounded-full bg-red-100 text-red-700 font-semibold">
                 Rejected
               </span>
@@ -255,9 +179,8 @@ export default function OrderListing() {
             </div>
           );
         }
-        // Pending: Accept, Reject, View Details
         return (
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
             <Button
               type="primary"
               size="small"
@@ -290,29 +213,34 @@ export default function OrderListing() {
         );
       },
     }
-
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2 style={{ marginBottom: 20 }}>Orders</h2>
-      {loading ? (
-        <Spin size="large" style={{ display: "block", margin: "auto" }} />
-      ) : (
-        <Table
-          columns={columns}
-          dataSource={paginatedData}
-          rowKey={(record) => record._id}
-          pagination={{
-            current,
-            pageSize,
-            total: orders.length,
-            onChange: handlePageChange,
-          }}
-          scroll={{ x: 1000 }}
-          bordered
-        />
-      )}
+    <div className="px-2 py-4 sm:px-6 lg:px-8">
+      <h2 className="text-xl sm:text-2xl font-bold text-center mb-4">Orders</h2>
+      <div className="overflow-x-auto bg-white rounded-lg shadow">
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={paginatedData}
+            rowKey={(record) => record._id}
+            pagination={{
+              current,
+              pageSize,
+              total: orders.length,
+              onChange: handlePageChange,
+              showSizeChanger: false,
+            }}
+            scroll={{ x: 900 }}
+            bordered
+            className="min-w-[600px]"
+          />
+        )}
+      </div>
     </div>
   );
 }

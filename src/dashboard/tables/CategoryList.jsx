@@ -36,7 +36,6 @@ export default function CategoryList() {
   };
 
   const handleEdit = (record) => {
-    // Navigate to edit page passing id (you need to implement edit page)
     navigate(`/dashboard/CategoryList/edit/${record._id}`);
   };
 
@@ -60,61 +59,61 @@ export default function CategoryList() {
       title: "Sl. No.",
       key: "index",
       render: (text, record, index) => (current - 1) * pageSize + index + 1,
-      width: 80,
+      width: 60,
     },
-    { title: "Category Name", dataIndex: "name", key: "name", width: 200 },
+    { title: "Category Name", dataIndex: "name", key: "name", width: 180 },
     // {
-    //   title: "Created At",
-    //   dataIndex: "createdAt",
-    //   key: "createdAt",
-    //   render: (date) => new Date(date).toLocaleString(),
-    //   width: 200,
+    //   title: "Actions",
+    //   key: "actions",
+    //   fixed: "right",
+    //   width: 120,
+    //   render: (text, record) => (
+    //     <div className="flex flex-col xs:flex-row gap-2">
+    //       <Button type="primary" size="small" onClick={() => handleEdit(record)}>
+    //         Edit
+    //       </Button>
+    //       <Popconfirm title="Are you sure to delete this category?" onConfirm={() => handleDelete(record._id)} okText="Yes" cancelText="No">
+    //         <Button danger size="small">Delete</Button>
+    //       </Popconfirm>
+    //     </div>
+    //   ),
     // },
-    {
-      title: "Actions",
-      key: "actions",
-      fixed: "right",
-      width: 140,
-      render: (text, record) => (
-        <div className="flex gap-2">
-          <Button type="primary" size="small" onClick={() => handleEdit(record)}>
-            Edit
-          </Button>
-          <Popconfirm title="Are you sure to delete this category?" onConfirm={() => handleDelete(record._id)} okText="Yes" cancelText="No">
-            <Button danger size="small">Delete</Button>
-          </Popconfirm>
-        </div>
-      ),
-    },
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2 style={{ textAlign: "center", marginBottom: 24 }}>Category List</h2>
+    <div className="px-2 py-4 sm:px-6 lg:px-8">
+      <h2 className="text-xl sm:text-2xl font-bold text-center mb-4">Category List</h2>
 
-      <div style={{ marginBottom: 16, textAlign: "right" }}>
+      <div className="mb-4 flex flex-wrap gap-2 justify-end">
         <Button type="primary" onClick={handleAddCategory}>
           Add Category
         </Button>
       </div>
 
-      {loading ? (
-        <Spin size="large" style={{ display: "block", margin: "auto" }} />
-      ) : (
-        <Table
-          columns={columns}
-          dataSource={paginatedData}
-          rowKey={(record) => record._id}
-          pagination={{
-            current,
-            pageSize,
-            total: categories.length,
-            onChange: handlePageChange,
-          }}
-          scroll={{ x: 800 }}
-          bordered
-        />
-      )}
+      <div className="overflow-x-auto bg-white rounded-lg shadow">
+        {loading ? (
+          <div className="flex justify-center items-center h-40">
+            <Spin size="large" />
+          </div>
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={paginatedData}
+            rowKey={(record) => record._id}
+            pagination={{
+              current,
+              pageSize,
+              total: categories.length,
+              onChange: handlePageChange,
+              responsive: true,
+              showSizeChanger: false,
+            }}
+            scroll={{ x: 420 }}
+            bordered
+            className="min-w-[380px]"
+          />
+        )}
+      </div>
     </div>
   );
 }

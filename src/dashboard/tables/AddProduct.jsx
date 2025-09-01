@@ -51,8 +51,8 @@ export default function AddProduct() {
         price: data.price || 0,
         productDiscountedPrice: data.productDiscountedPrice || 0,
         countInStock: data.countInStock || 0,
-        rating: data.rating || 0,
-        numReviews: data.numReviews || 0,
+        // rating: data.rating || 0,
+        // numReviews: data.numReviews || 0,
       });
 
       if (Array.isArray(data.image) && data.image.length > 0) {
@@ -290,7 +290,7 @@ export default function AddProduct() {
         </Form.Item>
 
         {/* Admin-only fields (Rating + Reviews) */}
-        <Form.Item label="Rating (Admin Only)">
+        {/* <Form.Item label="Rating (Admin Only)">
           <Controller
             name="rating"
             control={control}
@@ -304,7 +304,7 @@ export default function AddProduct() {
             control={control}
             render={({ field }) => <InputNumber {...field} min={0} style={{ width: "100%" }} />}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={loading} block>

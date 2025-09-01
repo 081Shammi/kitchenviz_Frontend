@@ -139,9 +139,9 @@ export default function CustomCarousel() {
               </Suspense>
 
               {/* Semi-transparent black overlay for text contrast */}
-              <div className="absolute inset-0 bg-black/25" />
+              {/* <div className="absolute inset-0 bg-black/25" /> */}
               {/* Centered, styled overlay text */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
+              {/* <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-10 px-8">
                 <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 via-yellow-200 to-orange-200 drop-shadow-2xl mb-6 tracking-tight leading-tight" style={{ fontFamily: "'Inter',sans-serif", textShadow: '0 4px 24px rgba(0,0,0,0.7)' }}>
                   {slide.name}
                 </h1>
@@ -150,8 +150,8 @@ export default function CustomCarousel() {
                     {slide.description}
                   </p>
                 )}
-              </div>
-              {slide.product?.name && slide.product?._id && (
+              </div> */}
+              {/* {slide.product?.name && slide.product?._id && (
                 console.log(slide.product),
 
                 <Link
@@ -174,7 +174,7 @@ export default function CustomCarousel() {
                   )}
                   <span className="text-lg font-bold">Shop Now</span>
                 </Link>
-              )}
+              )} */}
             </div>
           );
         })}

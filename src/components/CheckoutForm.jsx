@@ -106,7 +106,7 @@ export default function CheckoutForm({ cartItems, totalAmount, onSubmit, loading
           </Row>
         </Card>
 
-        <Card bordered={false} style={{ marginBottom: 24, borderRadius: 12, boxShadow: "0 0 6px #f0f0f0" }}>
+        {/* <Card bordered={false} style={{ marginBottom: 24, borderRadius: 12, boxShadow: "0 0 6px #f0f0f0" }}>
           <Divider orientation="left" style={{ fontWeight: 600, fontSize: 18, margin: 0 }}>Payment Method</Divider>
           <Row gutter={16}>
             <Col span={24}>
@@ -119,7 +119,7 @@ export default function CheckoutForm({ cartItems, totalAmount, onSubmit, loading
                 )}/>
             </Col>
           </Row>
-        </Card>
+        </Card> */}
 
         <Card bordered={false} style={{ borderRadius: 12, boxShadow: "0 0 6px #f0f0f0" }}>
           <Divider orientation="left" style={{ fontWeight: 600, fontSize: 18, margin: 0 }}>Order Summary</Divider>

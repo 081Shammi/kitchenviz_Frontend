@@ -56,7 +56,7 @@ const AdminLayout = () => {
           }}
         >
           <img
-            src="/public/assets/logo1.jpg"
+            src="assets/logo1.jpg"
             alt="Logo"
             style={{ height: 100, width: 100, marginBottom: 8 }}
           />
