@@ -1,34 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { clearCart } from '../reducers/cart';
+import Confetti from 'react-confetti';
 
 export default function Success() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  // To get window size for confetti full screen coverage
+  const [windowDimension, setWindowDimension] = useState({ width: window.innerWidth, height: window.innerHeight });
 
   useEffect(() => {
     dispatch(clearCart());
 
+    const handleResize = () => {
+      setWindowDimension({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener('resize', handleResize);
+
     const timer = setTimeout(() => {
       navigate('/');
-    }, 7000); // 7000 ms = 7 seconds
+    }, 7000); // Redirect after 7 seconds
 
-    // Cleanup timeout if component unmounts early
-    return () => clearTimeout(timer);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timer);
+    };
   }, [dispatch, navigate]);
 
   return (
-    <div className="flex items-center justify-center h-screen bg-green-50 flex-col">
+    <div className="flex items-center justify-center h-screen bg-green-50 flex-col relative overflow-hidden">
+      <Confetti width={windowDimension.width} height={windowDimension.height} />
       <h1
         className="text-3xl sm:text-4xl font-extrabold text-green-600 drop-shadow-lg mb-8 
-                   animate-success-pop"
+                   animate-success-pop z-10 relative"
       >
         Payment Successful
       </h1>
       <button
         onClick={() => navigate('/')}
-        className="px-8 py-3 rounded-full bg-green-600 hover:bg-green-700 transition text-white font-semibold text-lg shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 animate-fadeIn"
+        className="px-8 py-3 rounded-full bg-green-600 hover:bg-green-700 transition text-white font-semibold text-lg shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 animate-fadeIn z-10 relative"
       >
         Back to Home
       </button>
