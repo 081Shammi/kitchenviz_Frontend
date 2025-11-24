@@ -29,9 +29,9 @@ const Footer = () => {
               role="button"
               onClick={() => navigate('/')}
               onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
-              aria-label="KitchenViz Home"
+              aria-label="OVENIA Pvt Ltd Home"
             >
-              KitchenViz
+              OVENIA Pvt Ltd
             </span>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Bringing innovative kitchen gadgets and tech to your home. Modernize your daily life with our carefully curated products.
@@ -89,7 +89,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="mt-10 border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
           <div>
-            © {new Date().getFullYear()} KitchenViz. All rights reserved.
+            © {new Date().getFullYear()} OVENIA Pvt Ltd. All rights reserved.
           </div>
           <div className="flex space-x-3 mt-2 md:mt-0">
             {/* Optional: more footer links or social icons */}

@@ -1,7 +1,7 @@
 import PolicyPage from "./PolicyPage";
 
 const privacyContent = `
-<p>At Kitchen Viz, we value your privacy and are committed to protecting any personal information you share with us through our website. When you visit our site, we may collect basic details like your name, email address, and phone number especially if you fill out a form, subscribe to a newsletter, or contact us.</p>
+<p>At OVENIA, we value your privacy and are committed to protecting any personal information you share with us through our website. When you visit our site, we may collect basic details like your name, email address, and phone number especially if you fill out a form, subscribe to a newsletter, or contact us.</p>
 
 <p>We also collect technical data like IP address, browser type, and usage stats via cookies to improve your experience.</p>
 

@@ -56,7 +56,7 @@ const AdminLayout = () => {
           }}
         >
           <img
-            src="assets/logo1.jpg"
+            src="assets/logo1.jpeg"
             alt="Logo"
             style={{ height: 100, width: 100, marginBottom: 8 }}
           />
@@ -150,7 +150,7 @@ const AdminLayout = () => {
                 color: "#18181b",
               }}
             >
-              Kitchen Viz Admin Dashboard
+              OVENIA Admin Dashboard
             </span>
           </div>
 

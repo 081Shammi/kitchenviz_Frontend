@@ -70,7 +70,7 @@ export default function Login() {
             <div className="mb-6">
               <div className="mx-auto h-32 w-32 flex items-center justify-center">
                 {/* <span className="text-white text-2xl font-bold">L</span> */}
-                <img src="assets/logo1.jpg" alt="Your Company" />
+                <img src="assets/logo1.jpeg" alt="Your Company" />
               </div>
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>

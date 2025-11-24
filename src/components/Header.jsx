@@ -216,8 +216,8 @@ export default function Header() {
         {/* Logo */}
         <a href="/" className="flex items-center">
           <img
-            src="/assets/logo1.jpg"
-            alt="KitchenViz"
+            src="/assets/logo1.jpeg"
+            alt="OVENIA Pvt Ltd"
             className="h-20 w-auto transition-transform duration-300 hover:scale-110"
             draggable={false}
           />

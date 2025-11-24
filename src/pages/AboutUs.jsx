@@ -3,9 +3,9 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const aboutText = [
-  "At Kitchen Viz, we are reimagining the modern kitchen for today’s fast-paced, space-conscious, and tech-savvy lifestyle. Our mission is to simplify home cooking through smart, sustainable, and space-saving appliances that blend innovation with everyday convenience.",
+  "At OVENIA , we are reimagining the modern kitchen for today’s fast-paced, space-conscious, and tech-savvy lifestyle. Our mission is to simplify home cooking through smart, sustainable, and space-saving appliances that blend innovation with everyday convenience.",
   "Whether you're living in a compact urban home or just seeking smarter solutions, our products are crafted to make cooking faster, easier, and more efficient without compromising on style or functionality.",
-  "Founded by Suhas Kori, Kitchen Viz brings together cutting-edge technology, ergonomic design, and eco-friendly principles to create a new standard in kitchen living. We’re not just building appliances—we’re building smarter homes, one kitchen at a time.",
+  "Founded by Suhas Kori, OVENIA  brings together cutting-edge technology, ergonomic design, and eco-friendly principles to create a new standard in kitchen living. We’re not just building appliances—we’re building smarter homes, one kitchen at a time.",
 ];
 
 const highlights = [
@@ -17,7 +17,7 @@ const highlights = [
   {
     title: "Our Vision",
     content:
-      "The global smart kitchen market is growing rapidly, and Kitchen Viz is ready to lead with fresh ideas and cutting-edge designs.",
+      "The global smart kitchen market is growing rapidly, and OVENIA  is ready to lead with fresh ideas and cutting-edge designs.",
   },
   {
     title: "What We Offer",
@@ -47,7 +47,7 @@ const AboutUsPage = () => {
     <div className="font-sans bg-white min-h-screen">
       <main className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center pt-[6.30rem] pb-16 mt-16">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-yellow-600 text-center mb-8 drop-shadow-sm">
-          Welcome to Kitchen Viz
+          Welcome to OVENIA 
         </h1>
         <div className="max-w-3xl w-full mx-auto mb-10 space-y-7">
           {aboutText.map((para, i) => (
